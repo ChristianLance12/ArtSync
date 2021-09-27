@@ -1,0 +1,1 @@
+export const translationsToString = (word) => word.map(i => i.text).join(' / ')
