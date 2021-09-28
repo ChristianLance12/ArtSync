@@ -4,42 +4,56 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    private CharacterController controller;
-    private Vector3 playerVelocity;
-    private bool groundedPlayer;
-    private float playerSpeed = 2.0f;
-    private float jumpHeight = 1.0f;
-    private float gravityValue = -9.81f;
-
+    public Transform head;
+    public Transform player;
+    public float speed;
+    public float rotSpeed;
+    private float currentSpeed;
+    private float sprintSpeed;
+    private Rigidbody rb;
     void Start()
     {
-        controller = gameObject.AddComponent<CharacterController>();
+        rb = this.GetComponent<Rigidbody>();
+        player = this.transform;
+        currentSpeed = speed;
+        sprintSpeed = speed * 2;
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
+        Vector3 rotInput = new Vector3(0, Input.GetAxis("Mouse X"), 0);
+        Vector3 headInput = new Vector3(-Input.GetAxis("Mouse Y"), 0, 0);
+        head.Rotate(headInput * Time.deltaTime * rotSpeed);
+        player.Rotate(rotInput * Time.deltaTime * rotSpeed);
+        if (Input.GetKey(KeyCode.W))
         {
-            playerVelocity.y = 0f;
+            rb.MovePosition(transform.position + transform.forward * Time.deltaTime * currentSpeed);
         }
-
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        controller.Move(move * Time.deltaTime * playerSpeed);
-
-        if (move != Vector3.zero)
+        if (Input.GetKey(KeyCode.S))
         {
-            gameObject.transform.forward = move;
+            rb.MovePosition(transform.position - transform.forward * Time.deltaTime * currentSpeed);
         }
-
-        // Changes the height position of the player..
-        if (Input.GetButtonDown("Jump") && groundedPlayer)
+        if (Input.GetKey(KeyCode.A))
         {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            rb.MovePosition(transform.position - transform.right * Time.deltaTime * currentSpeed);
         }
-
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+        if (Input.GetKey(KeyCode.D))
+        {
+            rb.MovePosition(transform.position + transform.right * Time.deltaTime * currentSpeed);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            currentSpeed = sprintSpeed; 
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            currentSpeed = speed;
+        }
+           
+            
+        
     }
 }
