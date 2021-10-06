@@ -14673,5 +14673,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: WideFrame
       objectReference: {fileID: 0}
+    - target: {fileID: 8127300312340211619, guid: f48792f06e066a747950b70bd8f06dc9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dc17481e516eb4c418ded6ec823f5798, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f48792f06e066a747950b70bd8f06dc9, type: 3}
