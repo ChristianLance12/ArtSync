@@ -13,7 +13,7 @@ public class ImageLoad : MonoBehaviour
 
     IEnumerator GetTexture()
     {
-        UnityWebRequest www = UnityWebRequestTexture.GetTexture("file://C:/Users/chris/Pictures/gigachad1.jpg");
+        UnityWebRequest www = UnityWebRequestTexture.GetTexture("https://i.kym-cdn.com/entries/icons/original/000/026/152/gigachad.jpg");
         yield return www.SendWebRequest();
 
         if (www.result != UnityWebRequest.Result.Success)
