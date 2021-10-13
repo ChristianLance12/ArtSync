@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public bool paused;
+    public bool viewing;
+    public GameObject pauseUI;
+    public GameObject viewtxt;
+    public GameObject viewtxt2;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -13,6 +17,33 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (viewing == false)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape) && paused == false)
+            {
+
+                Pause();
+                pauseUI.SetActive(true);
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Mouse0) && paused)
+            {
+
+                UnPause();
+                pauseUI.SetActive(false);
+            }
+        }
+    }
+    public void Pause()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0;
+        paused = true;
+    } 
+    public void UnPause()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1;
+        paused = false;
     }
 }
+ 
