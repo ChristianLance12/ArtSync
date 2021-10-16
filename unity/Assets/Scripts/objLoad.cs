@@ -8,7 +8,7 @@ public class objLoad : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(GetMesh());
+        //StartCoroutine(GetMesh());
     }
     //https://www.cgtrader.com/items/72531/free-downloads/238325
     // Update is called once per frame
@@ -28,7 +28,7 @@ public class objLoad : MonoBehaviour
         else
         {
             var myMesh = ((DownloadHandlerFile)www.downloadHandler).data;
-            GetComponent<MeshFilter>().mesh = myMesh;
+            //GetComponent<MeshFilter>().mesh = myMesh;
         }
     }
 }
