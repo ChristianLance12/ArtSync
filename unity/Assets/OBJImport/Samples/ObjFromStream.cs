@@ -6,10 +6,11 @@ using UnityEngine;
 public class ObjFromStream : MonoBehaviour {
     public GameController gM;
     public Transform[] spawnPoints;
+    public string address;
 	void Start () {
         //make www
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-        var www = new WWW("https://people.sc.fsu.edu/~jburkardt/data/obj/gourd.obj");
+        var www = new WWW(address);
         while (!www.isDone)
             System.Threading.Thread.Sleep(1);
         

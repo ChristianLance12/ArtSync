@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 using System.IO;
 public class ImageLoad : MonoBehaviour
 {
-
+    public string address;
     // Use this for initialization
     void Start()
     {
@@ -13,7 +13,7 @@ public class ImageLoad : MonoBehaviour
 
     IEnumerator GetTexture()
     {
-        UnityWebRequest www = UnityWebRequestTexture.GetTexture("https://i.kym-cdn.com/entries/icons/original/000/026/152/gigachad.jpg");
+        UnityWebRequest www = UnityWebRequestTexture.GetTexture(address);
         yield return www.SendWebRequest();
 
         if (www.result != UnityWebRequest.Result.Success)
