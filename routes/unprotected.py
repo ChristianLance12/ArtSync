@@ -1,6 +1,6 @@
 import json
 
-from flask import Blueprint, request, send_from_directory, render_template
+from flask import Blueprint, request, render_template, current_app
 from flask_login import login_user, current_user
 from datastore import get_user_by_email, create_user
 from werkzeug.security import check_password_hash
@@ -67,3 +67,10 @@ def register():
 @unprotected.route('/user_is_authorized')
 def data():
     return json.dumps({ "authorized": current_user.is_authenticated})    
+
+
+
+@unprotected.route('/scenes')
+def scenes():
+    scenes = current_app.config['SCENES']
+    return json.dumps({ "scenes": scenes })    

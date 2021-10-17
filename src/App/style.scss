@@ -44,18 +44,6 @@ p, button, input {
 #root {
     width: 100vw;
     height: 100vh;
-
-    main {
-        padding: 36px;
-        height: calc(80% - 64px);
-        width: calc(100% - 72px);
-        max-width: 600px;
-        margin: auto;
-
-        display: grid;
-        grid-template-rows: 1fr;
-        grid-template-columns: 1fr;
-    }
 }
 
 button {
