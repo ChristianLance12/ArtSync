@@ -4,7 +4,7 @@ import os
 def get_scenes():
 
     scenes = []
-    for root, _, files in os.walk('./static'):
+    for root, _, files in os.walk('./static_content'):
         for filename in files:
             if filename == "GUID.txt":
 

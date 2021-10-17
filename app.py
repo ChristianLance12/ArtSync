@@ -20,18 +20,20 @@ class FlaskApp(Flask):
             init_db(IS_PRODUCTION)    
         super(FlaskApp, self).run(host=host, port=port, debug=debug, load_dotenv=load_dotenv, **options)
 
-app = FlaskApp(__name__)
+app = Flask(__name__, static_folder='build')
 app.config['SECRET_KEY'] = SECRET_KEY
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 
 app.config['SCENES'] = get_scenes()
 
-build_folder = Blueprint('build', __name__, static_url_path='/build', static_folder='build')
+# static folder for react app build
+build_folder = Blueprint('build', __name__, static_url_path='/', static_folder='build')
 app.register_blueprint(build_folder)
 
-static_folder = Blueprint('static', __name__, static_url_path='/', static_folder='static')
-
+# static folder for public files, images, and scenes
+static_folder = Blueprint('static', __name__, static_url_path='/static_content', static_folder='static_content')
 app.register_blueprint(static_folder)
+
 app.register_blueprint(protected)
 app.register_blueprint(unprotected)
 app.register_blueprint(admin)

@@ -14,13 +14,8 @@ def page_not_found():
 
 
 @unprotected.route('/')
-@unprotected.route('/register')
-@unprotected.route('/login')
-@unprotected.route('/admin')
-@unprotected.route('/home')
 def index():
     return render_template('index.html', )
-
 
 
 @unprotected.route('/login', methods=['POST'])
