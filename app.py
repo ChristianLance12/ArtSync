@@ -26,6 +26,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 
 app.config['SCENES'] = get_scenes()
 
+
 # static folder for react app build
 build_folder = Blueprint('build', __name__, static_url_path='/', static_folder='build')
 app.register_blueprint(build_folder)
