@@ -9,9 +9,11 @@ public class GameController : MonoBehaviour
     public GameObject pauseUI;
     public GameObject viewtxt;
     public GameObject viewtxt2;
+    public Material marble;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        marble = Resources.Load<Material>("Textures/Marble");
     }
 
     // Update is called once per frame

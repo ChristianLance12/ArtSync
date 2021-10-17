@@ -4,9 +4,11 @@ using System.Text;
 using UnityEngine;
 
 public class ObjFromStream : MonoBehaviour {
+    public GameController gM;
     public Transform[] spawnPoints;
 	void Start () {
         //make www
+        gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
         var www = new WWW("https://people.sc.fsu.edu/~jburkardt/data/obj/gourd.obj");
         while (!www.isDone)
             System.Threading.Thread.Sleep(1);
@@ -21,6 +23,8 @@ public class ObjFromStream : MonoBehaviour {
             loadedObj.transform.GetChild(i).gameObject.AddComponent(typeof(Rigidbody));
             loadedObj.transform.GetChild(i).gameObject.GetComponent<MeshCollider>().convex = true;
             loadedObj.transform.GetChild(i).gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+            loadedObj.transform.GetChild(i).GetComponent<MeshRenderer>().material = gM.marble;
+              
         }
         
 	}
