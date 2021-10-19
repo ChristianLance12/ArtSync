@@ -10,9 +10,10 @@ public class ObjFromStream : MonoBehaviour {
 	void Start () {
         //make www
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-       
+        
               
         }
+    
     public void SpawnGourds (int amount)
     {
         while (amount > 0)
