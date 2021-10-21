@@ -7,13 +7,16 @@ public class ObjFromStream : MonoBehaviour {
     private GameController gM;
     public Transform[] objSpawns;
     public string testUrl;
+    public string testUrl2;
     public int testSpawn;
-	void Start () {
+    public int testSpawn2;
+    //https://people.sc.fsu.edu/~jburkardt/data/obj/gourd.obj
+    void Start () {
         //make www
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
         LoadObjs(testSpawn, testUrl);
-              
-        }
+        LoadObjs(testSpawn2, testUrl2);
+    }
     
     public void LoadObjs (int spawn, string url)
     {
@@ -32,7 +35,8 @@ public class ObjFromStream : MonoBehaviour {
                 loadedObj.transform.GetChild(i).gameObject.AddComponent(typeof(Rigidbody));
                 loadedObj.transform.GetChild(i).gameObject.GetComponent<MeshCollider>().convex = true;
                 loadedObj.transform.GetChild(i).gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
-                loadedObj.transform.GetChild(i).GetComponent<MeshRenderer>().material = gM.marble;
+                loadedObj.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().material = gM.marble;
+            loadedObj.transform.GetChild(i).gameObject.AddComponent<ObjSizing>();
             }
           
         

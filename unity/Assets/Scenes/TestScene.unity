@@ -1155,8 +1155,10 @@ MonoBehaviour:
   - {fileID: 2079040672}
   - {fileID: 1790210799}
   - {fileID: 1309103891}
-  testUrl: https://people.sc.fsu.edu/~jburkardt/data/obj/gourd.obj
+  testUrl: https://groups.csail.mit.edu/graphics/classes/6.837/F03/models/teddy.obj
+  testUrl2: https://people.sc.fsu.edu/~jburkardt/data/obj/gourd.obj
   testSpawn: 2
+  testSpawn2: 0
 --- !u!114 &99031364
 MonoBehaviour:
   m_ObjectHideFlags: 0
