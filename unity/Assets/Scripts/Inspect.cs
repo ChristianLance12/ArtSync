@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Inspect : MonoBehaviour
 {
-   private bool inRange;
+   public bool inRange;
    private GameController gM;
     public GameObject view;
     void Start()
@@ -17,13 +17,14 @@ public class Inspect : MonoBehaviour
         //inspect/view action
         if (inRange && Input.GetKeyDown(KeyCode.Space) && gM.viewing == false && gM.paused == false) 
         {
+            Cursor.lockState = CursorLockMode.None;
             view.SetActive(true);
             gM.viewing = true;
-            gM.Pause();
+            
         }
         else if (inRange && Input.GetKeyDown(KeyCode.Space) && gM.viewing)
         {
-            gM.UnPause();
+            Cursor.lockState = CursorLockMode.Locked    ;
             gM.viewing = false;
             view.SetActive(false);
         }

@@ -1159,6 +1159,7 @@ MonoBehaviour:
   testUrl2: https://people.sc.fsu.edu/~jburkardt/data/obj/gourd.obj
   testSpawn: 2
   testSpawn2: 0
+  cameraPrefab: {fileID: 6798819194126486843, guid: c56b862e0af741f4ebc9add5b53f7e45, type: 3}
 --- !u!114 &99031364
 MonoBehaviour:
   m_ObjectHideFlags: 0

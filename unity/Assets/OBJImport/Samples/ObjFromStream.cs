@@ -10,7 +10,8 @@ public class ObjFromStream : MonoBehaviour {
     public string testUrl2;
     public int testSpawn;
     public int testSpawn2;
-    //https://people.sc.fsu.edu/~jburkardt/data/obj/gourd.obj
+    public GameObject cameraPrefab;
+   
     void Start () {
         //make www
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
@@ -31,14 +32,15 @@ public class ObjFromStream : MonoBehaviour {
             loadedObj.transform.position = objSpawns[spawn].position;
             for (int i = 0; i < loadedObj.transform.childCount; i++)
             {
-                loadedObj.transform.GetChild(i).gameObject.AddComponent(typeof(MeshCollider));
                 loadedObj.transform.GetChild(i).gameObject.AddComponent(typeof(Rigidbody));
-                loadedObj.transform.GetChild(i).gameObject.GetComponent<MeshCollider>().convex = true;
                 loadedObj.transform.GetChild(i).gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
                 loadedObj.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().material = gM.marble;
             loadedObj.transform.GetChild(i).gameObject.AddComponent<ObjSizing>();
             }
-          
-        
-	}
+        var camera = Instantiate(cameraPrefab, new Vector3(loadedObj.transform.position.x + 6, loadedObj.transform.position.y - 4, loadedObj.transform.position.z), Quaternion.identity);
+        camera.SetActive(false);
+        camera.transform.parent = loadedObj.transform;
+        loadedObj.transform.GetChild(0).gameObject.AddComponent<Inspect>().view = camera;
+       
+    }
 }

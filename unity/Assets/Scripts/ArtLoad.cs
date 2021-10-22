@@ -13,11 +13,11 @@ public class ArtLoad : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LoadPictures(testFrame, testSpawn, testURL);
+        LoadArt(testFrame, testSpawn, testURL);
     }
 
     // Update is called once per frame
-    public void LoadPictures(int frame, int spawn, string url)
+    public void LoadArt(int frame, int spawn, string url)
     {
         GameObject art = Instantiate(frames[frame], new Vector3(0, 0, 0), Quaternion.identity);
         art.transform.position = artSpawns[spawn].position;
