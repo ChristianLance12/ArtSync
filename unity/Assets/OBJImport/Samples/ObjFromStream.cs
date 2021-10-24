@@ -1,7 +1,9 @@
 ﻿using Dummiesman;
+using System.Collections;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class ObjFromStream : MonoBehaviour {
     private GameController gM;
@@ -15,19 +17,23 @@ public class ObjFromStream : MonoBehaviour {
     void Start () {
         //make www
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-        LoadObjs(testSpawn, testUrl);
-        LoadObjs(testSpawn2, testUrl2);
+        StartCoroutine(LoadObjs(testSpawn, testUrl));
+        StartCoroutine(LoadObjs(testSpawn2, testUrl2));
     }
     
-    public void LoadObjs (int spawn, string url)
+    public IEnumerator LoadObjs (int spawn, string url)
     {
        
-            var www = new WWW(url);
-            while (!www.isDone)
-                System.Threading.Thread.Sleep(1);
-
+            UnityWebRequest www = UnityWebRequest.Get(url);
+        yield return www.SendWebRequest();
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.Log(www.error);
+        }
+        else
+        {
             //create stream and load
-            var textStream = new MemoryStream(Encoding.UTF8.GetBytes(www.text));
+            var textStream = new MemoryStream(Encoding.UTF8.GetBytes(www.downloadHandler.text));
             var loadedObj = new OBJLoader().Load(textStream);
             loadedObj.transform.position = objSpawns[spawn].position;
             for (int i = 0; i < loadedObj.transform.childCount; i++)
@@ -35,12 +41,13 @@ public class ObjFromStream : MonoBehaviour {
                 loadedObj.transform.GetChild(i).gameObject.AddComponent(typeof(Rigidbody));
                 loadedObj.transform.GetChild(i).gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
                 loadedObj.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().material = gM.marble;
-            loadedObj.transform.GetChild(i).gameObject.AddComponent<ObjSizing>();
+                loadedObj.transform.GetChild(i).gameObject.AddComponent<ObjSizing>();
             }
-        var camera = Instantiate(cameraPrefab, new Vector3(loadedObj.transform.position.x + 6, loadedObj.transform.position.y - 4, loadedObj.transform.position.z), Quaternion.identity);
-        camera.SetActive(false);
-        camera.transform.parent = loadedObj.transform;
-        loadedObj.transform.GetChild(0).gameObject.AddComponent<Inspect>().view = camera;
+            var camera = Instantiate(cameraPrefab, new Vector3(loadedObj.transform.position.x + 6, loadedObj.transform.position.y - 4, loadedObj.transform.position.z), Quaternion.identity);
+            camera.SetActive(false);
+            camera.transform.parent = loadedObj.transform;
+            loadedObj.transform.GetChild(0).gameObject.AddComponent<Inspect>().view = camera;
+        }
        
     }
 }
