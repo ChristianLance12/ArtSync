@@ -17,8 +17,8 @@ public class ObjFromStream : MonoBehaviour {
     void Start () {
         //make www
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-        // StartCoroutine(LoadObjs(testSpawn, testUrl));
-      //  StartCoroutine(LoadObjs(testSpawn2, testUrl2));
+       StartCoroutine(LoadObjs(testSpawn, testUrl));
+      StartCoroutine(LoadObjs(testSpawn2, testUrl2));
     }
     
     public IEnumerator LoadObjs (int spawn, string url)
@@ -33,6 +33,7 @@ public class ObjFromStream : MonoBehaviour {
         else
         {
             //create stream and load
+            gM.totalItems += 1;
             var textStream = new MemoryStream(Encoding.UTF8.GetBytes(www.downloadHandler.text));
             var loadedObj = new OBJLoader().Load(textStream);
             loadedObj.transform.position = objSpawns[spawn].position;

@@ -7,10 +7,14 @@ public class ObjSizing : MonoBehaviour
     private float[] bounds = { 0, 0, 0 };
     private float max;
     private float scale;
+    private bool done;
+    private GameController gM;
     // Start is called before the first frame update
     void Start()
     {
         ObjSize();
+        gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+
     }
     // Update is called once per frame
     public void ObjSize()
@@ -34,6 +38,13 @@ public class ObjSizing : MonoBehaviour
         gameObject.AddComponent<SphereCollider>();
         gameObject.GetComponent<SphereCollider>().radius = 5/scale;
         gameObject.GetComponent<SphereCollider>().isTrigger = true;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag != "Player" && done == false)
+        {
+            gM.loadedItems += 1;
+        }
     }
 }
 

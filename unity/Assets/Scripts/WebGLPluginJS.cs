@@ -22,6 +22,7 @@ public class WebGLPluginJS : MonoBehaviour
     [DllImport("__Internal")]
     private static extern void BindWebGLTexture(int texture);
 
+#if (!UNITY_EDITOR)
     void Start()
     {
         Hello();
@@ -39,4 +40,5 @@ public class WebGLPluginJS : MonoBehaviour
         var texture = new Texture2D(0, 0, TextureFormat.ARGB32, false);
         BindWebGLTexture(texture.GetNativeTextureID());
     }
+#endif
 }

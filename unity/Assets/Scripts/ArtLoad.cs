@@ -10,10 +10,12 @@ public class ArtLoad : MonoBehaviour
     public int testSpawn;
     public Transform[] artSpawns;
     public GameObject[] frames;
+    private GameController gM;
     // Start is called before the first frame update
     void Start()
     {
-      //  LoadArt(testFrame, testSpawn, testURL);
+        gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+     LoadArt(testFrame, testSpawn, testURL);
     }
 
     // Update is called once per frame
@@ -21,7 +23,7 @@ public class ArtLoad : MonoBehaviour
     {
         GameObject art = Instantiate(frames[frame], new Vector3(0, 0, 0), Quaternion.identity);
         art.transform.position = artSpawns[spawn].position;
-        art.transform.rotation = Quaternion.Euler(0, artSpawns[spawn].eulerAngles.y, 90);
+        art.transform.rotation = Quaternion.Euler(0, artSpawns[spawn].eulerAngles.y + 90, 90);
         
 
 
@@ -38,8 +40,11 @@ public class ArtLoad : MonoBehaviour
         }
         else
         {
+            gM.totalItems += 1;
             Texture myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
             canvas.GetComponent<Renderer>().material.mainTexture = myTexture;
+            canvas.GetComponent<Inspect>().url = url;
+            gM.loadedItems += 1;
         }
     }
 }

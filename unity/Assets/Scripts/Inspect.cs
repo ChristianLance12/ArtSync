@@ -5,6 +5,7 @@ using UnityEngine;
 public class Inspect : MonoBehaviour
 {
    public bool inRange;
+    public string url;
    private GameController gM;
     public GameObject view;
     void Start()
