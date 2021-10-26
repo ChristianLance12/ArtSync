@@ -13,7 +13,7 @@ public class ArtLoad : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LoadArt(testFrame, testSpawn, testURL);
+      //  LoadArt(testFrame, testSpawn, testURL);
     }
 
     // Update is called once per frame

@@ -17,8 +17,8 @@ public class ObjFromStream : MonoBehaviour {
     void Start () {
         //make www
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-        StartCoroutine(LoadObjs(testSpawn, testUrl));
-        StartCoroutine(LoadObjs(testSpawn2, testUrl2));
+        // StartCoroutine(LoadObjs(testSpawn, testUrl));
+      //  StartCoroutine(LoadObjs(testSpawn2, testUrl2));
     }
     
     public IEnumerator LoadObjs (int spawn, string url)
