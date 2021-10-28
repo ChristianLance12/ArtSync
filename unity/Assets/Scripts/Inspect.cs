@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Inspect : MonoBehaviour
 {
-   public bool inRange;
+   private bool inRange;
     public string url;
    private GameController gM;
     public GameObject view;
@@ -23,27 +24,23 @@ public class Inspect : MonoBehaviour
             gM.viewing = true;
             
         }
-        else if (inRange && Input.GetKeyDown(KeyCode.Space) && gM.viewing)
+        else if (inRange && Input.GetKeyDown(KeyCode.Space) && gM.viewing == true)
         {
-            Cursor.lockState = CursorLockMode.Locked    ;
-            gM.viewing = false;
+            Cursor.lockState = CursorLockMode.Locked;
             view.SetActive(false);
+            gM.viewing = false;
+           
         }
         //inspect ui prompt
-        if (inRange && gM.viewing == false)
+        if (inRange && gM.viewing)
         {
-            gM.viewtxt.SetActive(true);
-            gM.viewtxt2.SetActive(false);
+            gM.viewtxtText.text = "[Space] to stop";
+
         }
-        else if (inRange && gM.viewing)
+        else if (inRange && gM.viewing == false)
         {
-            gM.viewtxt.SetActive(false);
-            gM.viewtxt2.SetActive(true);
-        }
-        else
-        {
-            gM.viewtxt.SetActive(false);
-            gM.viewtxt2.SetActive(false);
+            gM.viewtxtText.text = "[Space] to inspect";
+
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -51,6 +48,7 @@ public class Inspect : MonoBehaviour
         if (other.tag == "Player")
         {
             inRange = true;
+            gM.viewtxt.SetActive(true);
         }
     }
     private void OnTriggerExit(Collider other)
@@ -58,6 +56,7 @@ public class Inspect : MonoBehaviour
         if (other.tag == "Player")
         {
             inRange = false;
+            gM.viewtxt.SetActive(false);
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class GameController : MonoBehaviour
     public bool viewing;
     public GameObject pauseUI;
     public GameObject viewtxt;
-    public GameObject viewtxt2;
+    public Text viewtxtText;
     public Material marble;
     public string[] images;
     public GameObject loadingScreen;

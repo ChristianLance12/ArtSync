@@ -48,6 +48,7 @@ public class ObjFromStream : MonoBehaviour {
             camera.SetActive(false);
             camera.transform.parent = loadedObj.transform;
             loadedObj.transform.GetChild(0).gameObject.AddComponent<Inspect>().view = camera;
+            loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().url = url;
         }
        
     }
