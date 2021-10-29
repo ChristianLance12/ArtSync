@@ -9,8 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Marble
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _DETAIL_TEXTURED _WETNESS_NONE
-  m_LightmapFlags: 4
+  m_ShaderKeywords: _DETAIL_TEXTURED _EMISSION _METALLICGLOSSMAP _WETNESS_NONE
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -56,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 4ab5d07b1ad7df647a0000813a5c5b29, type: 3}
+        m_Texture: {fileID: 2800000, guid: 82937677b738ee645b551a3a28f3c6b7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap2:
@@ -282,7 +282,7 @@ Material:
     - _DetailSpecGloss: {r: 1, g: 1, b: 1, a: 1}
     - _DiffuseScatteringColor: {r: 0, g: 0, b: 0, a: 0}
     - _DiffuseScatteringColor2: {r: 0, g: 0, b: 0, a: 0}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 0.29125535, g: 0.29125535, b: 0.29125535, a: 1}
     - _GlitterColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.2}
     - _GlitterColor2: {r: 0.8, g: 0.8, b: 0.8, a: 0.2}
     - _SnowColorAndCoverage: {r: 1, g: 1, b: 1, a: 1}

@@ -1,40 +1,55 @@
 ﻿using Dummiesman;
+using System.Collections;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class ObjFromStream : MonoBehaviour {
-    public GameController gM;
-    public Transform[] spawnPoints;
-    public string address;
-	void Start () {
+    private GameController gM;
+    public Transform[] objSpawns;
+    public string testUrl;
+    public string testUrl2;
+    public int testSpawn;
+    public int testSpawn2;
+    public GameObject cameraPrefab;
+   
+    void Start () {
         //make www
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-       
-              
-        }
-    public void SpawnGourds (int amount)
+       StartCoroutine(LoadObjs(testSpawn, testUrl));
+      StartCoroutine(LoadObjs(testSpawn2, testUrl2));
+    }
+    
+    public IEnumerator LoadObjs (int spawn, string url)
     {
-        while (amount > 0)
+       
+            UnityWebRequest www = UnityWebRequest.Get(url);
+        yield return www.SendWebRequest();
+        if (www.result != UnityWebRequest.Result.Success)
         {
-            var www = new WWW(address);
-            while (!www.isDone)
-                System.Threading.Thread.Sleep(1);
-
+            Debug.Log(www.error);
+        }
+        else
+        {
             //create stream and load
-            var textStream = new MemoryStream(Encoding.UTF8.GetBytes(www.text));
+            gM.totalItems += 1;
+            var textStream = new MemoryStream(Encoding.UTF8.GetBytes(www.downloadHandler.text));
             var loadedObj = new OBJLoader().Load(textStream);
-            loadedObj.transform.position = spawnPoints[0].position;
+            loadedObj.transform.position = objSpawns[spawn].position;
             for (int i = 0; i < loadedObj.transform.childCount; i++)
             {
-                loadedObj.transform.GetChild(i).gameObject.AddComponent(typeof(MeshCollider));
                 loadedObj.transform.GetChild(i).gameObject.AddComponent(typeof(Rigidbody));
-                loadedObj.transform.GetChild(i).gameObject.GetComponent<MeshCollider>().convex = true;
                 loadedObj.transform.GetChild(i).gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
-                loadedObj.transform.GetChild(i).GetComponent<MeshRenderer>().material = gM.marble;
+                loadedObj.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().material = gM.marble;
+                loadedObj.transform.GetChild(i).gameObject.AddComponent<ObjSizing>();
             }
-            amount -= 1;
+            var camera = Instantiate(cameraPrefab, new Vector3(loadedObj.transform.position.x + 6, loadedObj.transform.position.y - 4, loadedObj.transform.position.z), Quaternion.identity);
+            camera.SetActive(false);
+            camera.transform.parent = loadedObj.transform;
+            loadedObj.transform.GetChild(0).gameObject.AddComponent<Inspect>().view = camera;
+            loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().url = url;
         }
-        
-	}
+       
+    }
 }

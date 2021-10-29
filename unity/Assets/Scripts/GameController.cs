@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -8,9 +9,12 @@ public class GameController : MonoBehaviour
     public bool viewing;
     public GameObject pauseUI;
     public GameObject viewtxt;
-    public GameObject viewtxt2;
+    public Text viewtxtText;
     public Material marble;
     public string[] images;
+    public GameObject loadingScreen;
+    public int loadedItems;
+    public int totalItems;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -35,6 +39,10 @@ public class GameController : MonoBehaviour
                 UnPause();
                 pauseUI.SetActive(false);
             }
+        }
+        if (loadedItems >= totalItems && loadingScreen == enabled && totalItems != 0)
+        {
+            loadingScreen.SetActive(false);
         }
     }
     public void Pause()

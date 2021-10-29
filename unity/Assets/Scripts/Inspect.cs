@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Inspect : MonoBehaviour
 {
    private bool inRange;
+    public string url;
    private GameController gM;
     public GameObject view;
     void Start()
@@ -17,31 +19,28 @@ public class Inspect : MonoBehaviour
         //inspect/view action
         if (inRange && Input.GetKeyDown(KeyCode.Space) && gM.viewing == false && gM.paused == false) 
         {
+            Cursor.lockState = CursorLockMode.None;
             view.SetActive(true);
             gM.viewing = true;
-            gM.Pause();
+            
         }
-        else if (inRange && Input.GetKeyDown(KeyCode.Space) && gM.viewing)
+        else if (inRange && Input.GetKeyDown(KeyCode.Space) && gM.viewing == true)
         {
-            gM.UnPause();
-            gM.viewing = false;
+            Cursor.lockState = CursorLockMode.Locked;
             view.SetActive(false);
+            gM.viewing = false;
+           
         }
         //inspect ui prompt
-        if (inRange && gM.viewing == false)
+        if (inRange && gM.viewing)
         {
-            gM.viewtxt.SetActive(true);
-            gM.viewtxt2.SetActive(false);
+            gM.viewtxtText.text = "[Space] to stop";
+
         }
-        else if (inRange && gM.viewing)
+        else if (inRange && gM.viewing == false)
         {
-            gM.viewtxt.SetActive(false);
-            gM.viewtxt2.SetActive(true);
-        }
-        else
-        {
-            gM.viewtxt.SetActive(false);
-            gM.viewtxt2.SetActive(false);
+            gM.viewtxtText.text = "[Space] to inspect";
+
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -49,6 +48,7 @@ public class Inspect : MonoBehaviour
         if (other.tag == "Player")
         {
             inRange = true;
+            gM.viewtxt.SetActive(true);
         }
     }
     private void OnTriggerExit(Collider other)
@@ -56,6 +56,7 @@ public class Inspect : MonoBehaviour
         if (other.tag == "Player")
         {
             inRange = false;
+            gM.viewtxt.SetActive(false);
         }
     }
 }
