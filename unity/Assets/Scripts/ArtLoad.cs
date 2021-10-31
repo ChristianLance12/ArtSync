@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 public class ArtLoad : MonoBehaviour
 {
+    public string jSon;
     public string testURL;
     public int testDimension;
     public int testFrame;
@@ -18,6 +19,7 @@ public class ArtLoad : MonoBehaviour
     {
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
      LoadArt(testDimension, testFrame, testSpawn, testURL);
+        JsonTest(jSon);
     }
 
     // Update is called once per frame
@@ -49,5 +51,24 @@ public class ArtLoad : MonoBehaviour
             canvas.GetComponent<Inspect>().url = url;
             gM.loadedItems += 1;
         }
+    }
+    void JsonTest(string json)
+    {
+        string name = getBetween(json, "'{\"name\":\"", "\", ");
+        string age = getBetween(json, "\"age\":", ", \"");
+        string car = getBetween(json, "car\":", "}'");
+        Debug.Log(name + " " + age + " " + car);
+    }
+    public static string getBetween(string strSource, string strStart, string strEnd)
+    {
+        if (strSource.Contains(strStart) && strSource.Contains(strEnd))
+        {
+            int Start, End;
+            Start = strSource.IndexOf(strStart, 0) + strStart.Length;
+            End = strSource.IndexOf(strEnd, Start);
+            return strSource.Substring(Start, End - Start);
+        }
+
+        return "";
     }
 }
