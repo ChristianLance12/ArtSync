@@ -6,26 +6,29 @@ using UnityEngine.Networking;
 public class ArtLoad : MonoBehaviour
 {
     public string testURL;
+    public int testDimension;
     public int testFrame;
     public int testSpawn;
     public Transform[] artSpawns;
-    public GameObject[] frames;
+    public GameObject[] frameDimension;
+    public Sprite[] frames;
     private GameController gM;
     // Start is called before the first frame update
     void Start()
     {
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-     LoadArt(testFrame, testSpawn, testURL);
+     LoadArt(testDimension, testFrame, testSpawn, testURL);
     }
 
     // Update is called once per frame
-    public void LoadArt(int frame, int spawn, string url)
+    public void LoadArt(int frameSize, int frame, int spawn, string url)
     {
-        GameObject art = Instantiate(frames[frame], new Vector3(0, 0, 0), Quaternion.identity);
+        var loadedFrame = frames[frame];
+        GameObject art = Instantiate(frameDimension[frameSize], new Vector3(0, 0, 0), Quaternion.identity);
         art.transform.position = artSpawns[spawn].position;
         art.transform.rotation = Quaternion.Euler(0, artSpawns[spawn].eulerAngles.y + 90, 90);
-        
-
+        art.GetComponent<SpriteRenderer>().sprite = loadedFrame;
+       
 
         StartCoroutine(GetTexture(url, art.transform.GetChild(0).gameObject));
     }
