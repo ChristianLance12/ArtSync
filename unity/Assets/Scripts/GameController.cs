@@ -31,6 +31,9 @@ public class GameController : MonoBehaviour
             {
 
                 Pause();
+                 #if !UNITY_EDITOR
+                WebGLPluginJS.OnUnityPause();
+#endif
                 pauseUI.SetActive(true);
             }
             else if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Mouse0) && paused)
@@ -38,6 +41,9 @@ public class GameController : MonoBehaviour
 
                 UnPause();
                 pauseUI.SetActive(false);
+                #if !UNITY_EDITOR
+                WebGLPluginJS.OnUnityUnpause();
+#endif
             }
         }
         if (loadedItems >= totalItems && loadingScreen == enabled && totalItems != 0)

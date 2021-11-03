@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15424,22 +15424,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3134413713363427187, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
-      propertyPath: testUrl
-      value: http://groups.csail.mit.edu/graphics/classes/6.837/F03/models/teddy.obj
-      objectReference: {fileID: 0}
-    - target: {fileID: 3134413713363427187, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
-      propertyPath: testUrl2
-      value: http://groups.csail.mit.edu/graphics/classes/6.837/F03/models/cow-nonormals.obj
-      objectReference: {fileID: 0}
-    - target: {fileID: 3134413713363427187, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
-      propertyPath: testSpawn2
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3134413713363427187, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
-      propertyPath: objSpawns.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3134413713363427187, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
       propertyPath: objSpawns.Array.data[0]
       value: 
       objectReference: {fileID: 2079040672}
@@ -15453,7 +15437,7 @@ PrefabInstance:
       objectReference: {fileID: 2079040672}
     - target: {fileID: 7929488297503671722, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
       propertyPath: jSon
-      value: '''{"name":"John", "age":30, "car":null}'''
+      value: '{"size":0,"frame":0,"position":0,"url":"/static_content/uploads/van-gogh-1.jpg"}'
       objectReference: {fileID: 0}
     - target: {fileID: 7929488297503671722, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
       propertyPath: json
@@ -15476,18 +15460,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7929488297503671722, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
-      propertyPath: artSpawns.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7929488297503671722, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
-      propertyPath: frames.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: e4380c76a25ab0043bf7460406de1a9a, type: 3}
-    - target: {fileID: 7929488297503671722, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
-      propertyPath: frames.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: e26af1f1f236dbb4e94241e6b403a10a, type: 3}
-    - target: {fileID: 7929488297503671722, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
       propertyPath: artSpawns.Array.data[0]
       value: 
       objectReference: {fileID: 905630077}
@@ -15495,18 +15467,6 @@ PrefabInstance:
       propertyPath: artSpawns.Array.data[1]
       value: 
       objectReference: {fileID: 1032664863}
-    - target: {fileID: 7929488297503671722, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
-      propertyPath: frameDimension.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7929488297503671722, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
-      propertyPath: frameDimension.Array.data[0]
-      value: 
-      objectReference: {fileID: 8127300311673145213, guid: 63db7946c94336244bd7e10670fa2294, type: 3}
-    - target: {fileID: 7929488297503671722, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
-      propertyPath: frameDimension.Array.data[1]
-      value: 
-      objectReference: {fileID: 8127300311673145213, guid: f48792f06e066a747950b70bd8f06dc9, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
 --- !u!1001 &5155807567952957981

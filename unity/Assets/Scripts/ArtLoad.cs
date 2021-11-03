@@ -6,10 +6,6 @@ using UnityEngine.Networking;
 public class ArtLoad : MonoBehaviour
 {
     public string jSon;
-    public string testURL;
-    public int testDimension;
-    public int testFrame;
-    public int testSpawn;
     public Transform[] artSpawns;
     public GameObject[] frameDimension;
     public Sprite[] frames;
@@ -18,8 +14,8 @@ public class ArtLoad : MonoBehaviour
     void Start()
     {
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-     LoadArt(testDimension, testFrame, testSpawn, testURL);
-        JsonTest(jSon);
+     
+       // ArtJson(jSon);
     }
 
     // Update is called once per frame
@@ -38,7 +34,7 @@ public class ArtLoad : MonoBehaviour
     {
         UnityWebRequest www = UnityWebRequestTexture.GetTexture(url);
         yield return www.SendWebRequest();
-
+        //
         if (www.result != UnityWebRequest.Result.Success)
         {
             Debug.Log(www.error);
@@ -52,12 +48,15 @@ public class ArtLoad : MonoBehaviour
             gM.loadedItems += 1;
         }
     }
-    void JsonTest(string json)
+    void ArtJson(string json)
     {
-        string name = getBetween(json, "'{\"name\":\"", "\", ");
-        string age = getBetween(json, "\"age\":", ", \"");
-        string car = getBetween(json, "car\":", "}'");
-        Debug.Log(name + " " + age + " " + car);
+        int frameSize = int.Parse(getBetween(json, "{\"size\":", ",\"frame"));
+        int frame = int.Parse(getBetween(json, "frame\":", ",\"p"));
+        int position = int.Parse(getBetween(json, "position\":", ",\"u"));
+        string url = getBetween(json, "url\":\"", "\"}");
+        LoadArt(frameSize, frame, position, url);
+        Debug.Log(frameSize + " " + frame + " " + position + " " + url);
+            
     }
     public static string getBetween(string strSource, string strStart, string strEnd)
     {

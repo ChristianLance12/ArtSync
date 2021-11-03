@@ -5,40 +5,16 @@ public class WebGLPluginJS : MonoBehaviour
 {
 
     [DllImport("__Internal")]
-    private static extern void Hello();
+    public static extern void OnUnityInspect(string jsonString);
 
     [DllImport("__Internal")]
-    private static extern void HelloString(string str);
+    public static extern void OnUnityUninspect();
 
     [DllImport("__Internal")]
-    private static extern void PrintFloatArray(float[] array, int size);
+    public static extern void OnUnityPause();
 
     [DllImport("__Internal")]
-    private static extern int AddNumbers(int x, int y);
+    public static extern string OnUnityUnpause();
 
-    [DllImport("__Internal")]
-    private static extern string StringReturnValueFunction();
 
-    [DllImport("__Internal")]
-    private static extern void BindWebGLTexture(int texture);
-
-#if (!UNITY_EDITOR)
-    void Start()
-    {
-        Hello();
-
-        HelloString("This is a string.");
-
-        float[] myArray = new float[10];
-        PrintFloatArray(myArray, myArray.Length);
-
-        int result = AddNumbers(5, 7);
-        Debug.Log(result);
-
-        Debug.Log(StringReturnValueFunction());
-
-        var texture = new Texture2D(0, 0, TextureFormat.ARGB32, false);
-        BindWebGLTexture(texture.GetNativeTextureID());
-    }
-#endif
 }

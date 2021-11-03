@@ -9,9 +9,11 @@ public class Inspect : MonoBehaviour
     public string url;
    private GameController gM;
     public GameObject view;
+    
     void Start()
     {
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+      
     }
 
     void Update()
@@ -22,14 +24,20 @@ public class Inspect : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             view.SetActive(true);
             gM.viewing = true;
-            
+           #if !UNITY_EDITOR
+            WebGLPluginJS.OnUnityInspect(url);
+#endif
+
         }
         else if (inRange && Input.GetKeyDown(KeyCode.Space) && gM.viewing == true)
         {
             Cursor.lockState = CursorLockMode.Locked;
             view.SetActive(false);
             gM.viewing = false;
-           
+             #if !UNITY_EDITOR
+            WebGLPluginJS.OnUnityUninspect();
+#endif
+
         }
         //inspect ui prompt
         if (inRange && gM.viewing)
