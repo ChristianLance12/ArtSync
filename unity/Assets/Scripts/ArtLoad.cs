@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class ArtLoad : MonoBehaviour
 {
-    public string jSon;
+    // public string jSon;
     public Transform[] artSpawns;
     public GameObject[] frameDimension;
     public Sprite[] frames;
@@ -14,20 +14,23 @@ public class ArtLoad : MonoBehaviour
     void Start()
     {
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-     
-       // ArtJson(jSon);
+        for (int i = 0; i < artSpawns.Length; i++)
+        {
+            artSpawns[i].GetComponent<EmptyInspect>().position = i;
+        }
+
+        // ArtJson(jSon);
     }
 
     // Update is called once per frame
     public void LoadArt(int frameSize, int frame, int spawn, string url)
     {
         var loadedFrame = frames[frame];
-        GameObject art = Instantiate(frameDimension[frameSize], new Vector3(0, 0, 0), Quaternion.identity);
+        GameObject art = Instantiate(frameDimension[frameSize], new Vector3(0, 0, 0), Quaternion.identity);        
         art.transform.position = artSpawns[spawn].position;
         art.transform.rotation = Quaternion.Euler(0, artSpawns[spawn].eulerAngles.y + 90, 90);
+        artSpawns[spawn].gameObject.SetActive(false);
         art.GetComponent<SpriteRenderer>().sprite = loadedFrame;
-       
-
         StartCoroutine(GetTexture(url, art.transform.GetChild(0).gameObject));
     }
     IEnumerator GetTexture(string url, GameObject canvas)

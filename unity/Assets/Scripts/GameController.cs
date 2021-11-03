@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour
     public GameObject pauseUI;
     public GameObject viewtxt;
     public Text viewtxtText;
+    public GameObject viewtxt2;
+    public Text viewtxt2Text;
     public Material marble;
     public string[] images;
     public GameObject loadingScreen;
