@@ -17,7 +17,11 @@ public class ObjFromStream : MonoBehaviour {
     void Start () {
         //make www
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-       StartCoroutine(LoadObjs(testSpawn, testUrl));
+        for (int i = 0; i < objSpawns.Length; i++)
+        {
+            objSpawns[i].GetComponent<EmptyInspect>().position = i;
+        }
+        StartCoroutine(LoadObjs(testSpawn, testUrl));
       StartCoroutine(LoadObjs(testSpawn2, testUrl2));
     }
     
@@ -45,11 +49,32 @@ public class ObjFromStream : MonoBehaviour {
                 loadedObj.transform.GetChild(i).gameObject.AddComponent<ObjSizing>();
             }
             var camera = Instantiate(cameraPrefab, new Vector3(loadedObj.transform.position.x + 6, loadedObj.transform.position.y - 4, loadedObj.transform.position.z), Quaternion.identity);
+            objSpawns[spawn].gameObject.SetActive(false);
             camera.SetActive(false);
             camera.transform.parent = loadedObj.transform;
             loadedObj.transform.GetChild(0).gameObject.AddComponent<Inspect>().view = camera;
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().url = url;
         }
        
+    }
+    void ObjJson(string json)
+    {
+        int position = int.Parse(getBetween(json, "{\"position\":", ",\"u"));
+        string url = getBetween(json, "url\":\"", "\"}");
+        StartCoroutine(LoadObjs(position, url));
+        Debug.Log(position + " " + url);
+
+    }
+    public static string getBetween(string strSource, string strStart, string strEnd)
+    {
+        if (strSource.Contains(strStart) && strSource.Contains(strEnd))
+        {
+            int Start, End;
+            Start = strSource.IndexOf(strStart, 0) + strStart.Length;
+            End = strSource.IndexOf(strEnd, Start);
+            return strSource.Substring(Start, End - Start);
+        }
+
+        return "";
     }
 }
