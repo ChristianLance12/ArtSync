@@ -3,7 +3,7 @@ import os
 from flask import Flask, Blueprint
 from flask_login import LoginManager 
 
-from routes import unprotected, protected, admin
+from routes import unprotected, protected, admin, static_content
 from datastore import User, db, init_db
 
 from utils import get_scenes
@@ -14,6 +14,9 @@ PORT = 5000 if not IS_PRODUCTION else os.environ.get('PORT')
 SECRET_KEY = 'tacocat' if not IS_PRODUCTION else os.environ.get('SECRET_KEY')
 DATABASE_URL = os.environ.get('DATABASE_URL') if IS_PRODUCTION else 'sqlite:///database.db'
 
+
+
+
 class FlaskApp(Flask):
     def run(self, host=None, port=None, debug=None, load_dotenv=True, **options):
         with self.app_context():
@@ -23,20 +26,20 @@ class FlaskApp(Flask):
 app = Flask(__name__, static_folder='build')
 app.config['SECRET_KEY'] = SECRET_KEY
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
-
 app.config['SCENES'] = get_scenes()
+
+BASE_FOLDER = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = BASE_FOLDER + '/static_content/uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # static folder for react app build
 build_folder = Blueprint('build', __name__, static_url_path='/', static_folder='build')
 app.register_blueprint(build_folder)
 
-# static folder for public files, images, and scenes
-static_folder = Blueprint('static', __name__, static_url_path='/static_content', static_folder='static_content')
-app.register_blueprint(static_folder)
-
 app.register_blueprint(protected)
 app.register_blueprint(unprotected)
 app.register_blueprint(admin)
+app.register_blueprint(static_content, url_prefix='/static_content')
 
 db.init_app(app)
 

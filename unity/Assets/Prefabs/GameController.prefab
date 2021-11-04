@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 3134413713363427186}
   - component: {fileID: 3134413713363427185}
   - component: {fileID: 3134413713363427187}
+  - component: {fileID: 7755060489827190205}
+  - component: {fileID: 7929488297503671722}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -48,9 +50,15 @@ MonoBehaviour:
   viewing: 0
   pauseUI: {fileID: 0}
   viewtxt: {fileID: 0}
+  viewtxtText: {fileID: 0}
   viewtxt2: {fileID: 0}
+  viewtxt2Text: {fileID: 0}
   marble: {fileID: 0}
   images: []
+  loadingScreen: {fileID: 0}
+  loadedItems: 0
+  totalItems: 0
+  loadedArt: []
 --- !u!114 &3134413713363427187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,7 +71,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daba88a30f38f3f4d8df0d146acfcd08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gM: {fileID: 0}
-  spawnPoints:
+  objSpawns:
   - {fileID: 0}
-  address: https://people.sc.fsu.edu/~jburkardt/data/obj/gourd.obj
+  - {fileID: 0}
+  testUrl: https://groups.csail.mit.edu/graphics/classes/6.837/F03/models/teddy.obj
+  testUrl2: https://groups.csail.mit.edu/graphics/classes/6.837/F03/models/cow-nonormals.obj
+  testSpawn: 1
+  testSpawn2: 2
+  cameraPrefab: {fileID: 6798819194126486843, guid: c56b862e0af741f4ebc9add5b53f7e45, type: 3}
+--- !u!114 &7755060489827190205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3134413713363427184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b8f59a5c01f6014eb42734aad6cd83b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7929488297503671722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3134413713363427184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 048e61475d3fff942b9349a0e24ee16c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  artSpawns:
+  - {fileID: 0}
+  - {fileID: 0}
+  frameDimension:
+  - {fileID: 8127300311673145213, guid: 63db7946c94336244bd7e10670fa2294, type: 3}
+  - {fileID: 8127300311673145213, guid: f48792f06e066a747950b70bd8f06dc9, type: 3}
+  frames:
+  - {fileID: 21300000, guid: e4380c76a25ab0043bf7460406de1a9a, type: 3}
+  - {fileID: 21300000, guid: e26af1f1f236dbb4e94241e6b403a10a, type: 3}

@@ -4,6 +4,7 @@ from flask import Blueprint, request, render_template, current_app
 from flask_login import login_user, current_user
 from datastore import get_user_by_email, create_user
 from werkzeug.security import check_password_hash
+from utils import get_uploads
 
 unprotected = Blueprint('unprotected', __name__, template_folder='../build')
 
@@ -69,3 +70,9 @@ def data():
 def scenes():
     scenes = current_app.config['SCENES']
     return json.dumps({ "scenes": scenes })    
+
+
+@unprotected.route('/uploads')
+def uploads():
+    uploads = get_uploads()
+    return json.dumps({ "uploads": uploads })    

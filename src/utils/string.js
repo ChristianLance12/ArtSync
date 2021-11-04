@@ -1,4 +1,4 @@
-import { camelCase, upperCase } from "lodash";
+import { upperCase } from "lodash";
 
 export const toHumanReadable = (text) => {
   return upperCase(text)
