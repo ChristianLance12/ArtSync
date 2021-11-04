@@ -18,6 +18,8 @@ const UnityControls = ({
   const { paused, unpauseEvent, pauseEvent } = useUnityPause();
   const { inspectedImage, inspectEvent, uninspectEvent } = useUnityInspect();
   
+  const host = useMemo(() => window.location.host, []);
+
   const exit = () => {
     setCurrentUnityContext(null)
     setCurrentScene(null);
@@ -58,14 +60,14 @@ const UnityControls = ({
 
           const { unityInstance } = currentUnityContext;
           const data = JSON.stringify({
+            size: 1,
             frame: 1,
-            spawn: 1, 
-            url: "/static_content/uploads/van-gogh-1.jpg"
-          })
+            position: 1,
+            url: `/static_content/uploads/van-gogh-1.jpg`
+          });
 
-          // const data = [1, 1, "/static_content/uploads/van-gogh-1.jpg"]
-
-          unityInstance.SendMessage("GameController", "LoadArt", data)
+          console.log("SENDING DATA", {data})
+          unityInstance.SendMessage("GameController", "ArtJson", data)
 
         }}>TEST LOAD</button>
       </div>
