@@ -22,17 +22,28 @@ public class EmptyInspect : MonoBehaviour
         if (inRange && Input.GetKeyDown(KeyCode.Space) && gM.viewing == false && gM.paused == false)
         {
             Cursor.lockState = CursorLockMode.None;
-            view.SetActive(true);
+            if (view != null)
+            {
+                view.SetActive(true);
+            }
             gM.viewing = true;
+#if !UNITY_EDITOR
+            WebGLPluginJS.EmptyInspect();
+#endif
 
 
         }
         else if (inRange && Input.GetKeyDown(KeyCode.Space) && gM.viewing == true)
         {
             Cursor.lockState = CursorLockMode.Locked;
-            view.SetActive(false);
+            if (view != null)
+            {
+                view.SetActive(false);
+            }
             gM.viewing = false;
-
+#if !UNITY_EDITOR
+            WebGLPluginJS.OnUnityUninspect();
+#endif
 
         }
         //inspect ui prompt
@@ -62,6 +73,10 @@ public class EmptyInspect : MonoBehaviour
             inRange = false;
             gM.viewtxt2.SetActive(false);
         }
+    }
+    private void OnDisable()
+    {
+        gM.viewtxt2.SetActive(false);
     }
 }
 

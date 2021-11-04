@@ -51,11 +51,14 @@ MonoBehaviour:
   pauseUI: {fileID: 0}
   viewtxt: {fileID: 0}
   viewtxtText: {fileID: 0}
+  viewtxt2: {fileID: 0}
+  viewtxt2Text: {fileID: 0}
   marble: {fileID: 0}
   images: []
   loadingScreen: {fileID: 0}
   loadedItems: 0
   totalItems: 0
+  loadedArt: []
 --- !u!114 &3134413713363427187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,10 +74,10 @@ MonoBehaviour:
   objSpawns:
   - {fileID: 0}
   - {fileID: 0}
-  testUrl: http://groups.csail.mit.edu/graphics/classes/6.837/F03/models/teddy.obj
-  testUrl2: http://groups.csail.mit.edu/graphics/classes/6.837/F03/models/cow-nonormals.obj
-  testSpawn: 0
-  testSpawn2: 1
+  testUrl: https://groups.csail.mit.edu/graphics/classes/6.837/F03/models/teddy.obj
+  testUrl2: https://groups.csail.mit.edu/graphics/classes/6.837/F03/models/cow-nonormals.obj
+  testSpawn: 1
+  testSpawn2: 2
   cameraPrefab: {fileID: 6798819194126486843, guid: c56b862e0af741f4ebc9add5b53f7e45, type: 3}
 --- !u!114 &7755060489827190205
 MonoBehaviour:
@@ -100,7 +103,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 048e61475d3fff942b9349a0e24ee16c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jSon: '''{"name":"John", "age":30, "car":null}'''
   artSpawns:
   - {fileID: 0}
   - {fileID: 0}

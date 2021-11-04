@@ -7,12 +7,14 @@ public class Inspect : MonoBehaviour
 {
    private bool inRange;
     public string url;
+    public int position;
    private GameController gM;
     public GameObject view;
     
     void Start()
     {
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+      
       
     }
 
@@ -57,6 +59,10 @@ public class Inspect : MonoBehaviour
         {
             inRange = true;
             gM.viewtxt.SetActive(true);
+        }
+        if (gM.viewing)
+        {
+            view.SetActive(true);
         }
     }
     private void OnTriggerExit(Collider other)

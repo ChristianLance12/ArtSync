@@ -16,5 +16,8 @@ public class WebGLPluginJS : MonoBehaviour
     [DllImport("__Internal")]
     public static extern string OnUnityUnpause();
 
+    [DllImport("__Internal")]
+    public static extern string EmptyInspect();
+
 
 }
