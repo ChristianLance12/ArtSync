@@ -48,16 +48,26 @@ public class ObjFromStream : MonoBehaviour {
                 loadedObj.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().material = gM.marble;
                 loadedObj.transform.GetChild(i).gameObject.AddComponent<ObjSizing>();
             }
+            for (int i = 0; i < gM.loadedObj.Count; i++)
+            {
+                if (gM.loadedObj[i].GetComponent<Inspect>().position == spawn)
+                {
+                    Destroy(gM.loadedObj[i].transform.parent.gameObject);
+                    gM.loadedObj.RemoveAt(i);
+                }
+            }
+            gM.loadedObj.Add(loadedObj.transform.GetChild(0).gameObject);
             var camera = Instantiate(cameraPrefab, new Vector3(loadedObj.transform.position.x + 6, loadedObj.transform.position.y - 4, loadedObj.transform.position.z), Quaternion.identity);
             objSpawns[spawn].gameObject.SetActive(false);
             camera.SetActive(false);
             camera.transform.parent = loadedObj.transform;
             loadedObj.transform.GetChild(0).gameObject.AddComponent<Inspect>().view = camera;
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().url = url;
+            loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().position = spawn;
         }
        
     }
-    void ObjJson(string json)
+    public void ObjJson(string json)
     {
         int position = int.Parse(getBetween(json, "{\"position\":", ",\"u"));
         string url = getBetween(json, "url\":\"", "\"}");

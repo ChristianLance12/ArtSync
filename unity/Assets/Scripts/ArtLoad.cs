@@ -25,12 +25,23 @@ public class ArtLoad : MonoBehaviour
     // Update is called once per frame
     public void LoadArt(int frameSize, int frame, int spawn, string url)
     {
+        for(int i = 0; i < gM.loadedArt.Count; i++)
+        {
+            if (gM.loadedArt[i].GetComponent<Inspect>().position == spawn)
+            {
+                Destroy(gM.loadedArt[i].transform.parent.gameObject);
+                gM.loadedArt.RemoveAt(i);
+            }
+        }
+        
         var loadedFrame = frames[frame];
         GameObject art = Instantiate(frameDimension[frameSize], new Vector3(0, 0, 0), Quaternion.identity);        
         art.transform.position = artSpawns[spawn].position;
         art.transform.rotation = Quaternion.Euler(0, artSpawns[spawn].eulerAngles.y + 90, 90);
         artSpawns[spawn].gameObject.SetActive(false);
         art.GetComponent<SpriteRenderer>().sprite = loadedFrame;
+        art.transform.GetChild(0).gameObject.GetComponent<Inspect>().position = spawn;
+        gM.loadedArt.Add(art.transform.GetChild(0).gameObject);
         StartCoroutine(GetTexture(url, art.transform.GetChild(0).gameObject));
     }
     IEnumerator GetTexture(string url, GameObject canvas)
@@ -51,7 +62,7 @@ public class ArtLoad : MonoBehaviour
             gM.loadedItems += 1;
         }
     }
-    void ArtJson(string json)
+    public void ArtJson(string json)
     {
         int frameSize = int.Parse(getBetween(json, "{\"size\":", ",\"frame"));
         int frame = int.Parse(getBetween(json, "frame\":", ",\"p"));

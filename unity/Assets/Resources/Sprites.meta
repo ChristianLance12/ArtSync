@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:unity/Assets/Standard Assets.meta
+guid: 9fa4eb3d4277555469e35542bd5eac97
+=======
 guid: 1f3c9245118c58e4cbe7b89f9a7cb352
+>>>>>>> 46bf35f154fe49fc655a04b6e322296599ddc7fe:unity/Assets/Resources/Sprites.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
