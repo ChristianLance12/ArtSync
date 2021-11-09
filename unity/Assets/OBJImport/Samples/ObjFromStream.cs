@@ -57,7 +57,7 @@ public class ObjFromStream : MonoBehaviour {
                 }
             }
             gM.loadedObj.Add(loadedObj.transform.GetChild(0).gameObject);
-            var camera = Instantiate(cameraPrefab, new Vector3(loadedObj.transform.position.x + 6, loadedObj.transform.position.y - 4, loadedObj.transform.position.z), Quaternion.identity);
+            var camera = Instantiate(cameraPrefab, new Vector3(loadedObj.transform.position.x + 4, loadedObj.transform.position.y - 2, loadedObj.transform.position.z), Quaternion.identity);
             objSpawns[spawn].gameObject.SetActive(false);
             camera.SetActive(false);
             camera.transform.parent = loadedObj.transform;

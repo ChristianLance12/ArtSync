@@ -31,12 +31,12 @@ public class ObjSizing : MonoBehaviour
             }
 
         }
-        scale = 4 / max;
+        scale = 3 / max;
         transform.localScale = new Vector3(scale, scale, scale);
         gameObject.AddComponent(typeof(MeshCollider));
        gameObject.GetComponent<MeshCollider>().convex = true;
         gameObject.AddComponent<SphereCollider>();
-        gameObject.GetComponent<SphereCollider>().radius = 5/scale;
+        gameObject.GetComponent<SphereCollider>().radius = 4/scale;
         gameObject.GetComponent<SphereCollider>().isTrigger = true;
     }
     private void OnCollisionEnter(Collision collision)
