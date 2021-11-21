@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
     public Text viewtxtText;
     public GameObject viewtxt2;
     public Text viewtxt2Text;
-    public Material marble;
+    public Material[] textures;
     public string[] images;
     public GameObject loadingScreen;
     public int loadedItems;

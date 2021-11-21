@@ -12,6 +12,8 @@ public class ObjFromStream : MonoBehaviour {
     public string testUrl2;
     public int testSpawn;
     public int testSpawn2;
+    public int testTex;
+    public int testTex2;
     public GameObject cameraPrefab;
    
     void Start () {
@@ -21,11 +23,11 @@ public class ObjFromStream : MonoBehaviour {
         {
             objSpawns[i].GetComponent<EmptyInspect>().position = i;
         }
-     //   StartCoroutine(LoadObjs(testSpawn, testUrl));
-     // StartCoroutine(LoadObjs(testSpawn2, testUrl2));
+        StartCoroutine(LoadObjs(testSpawn, testTex, testUrl));
+     StartCoroutine(LoadObjs(testSpawn2, testTex2, testUrl2));
     }
     
-    public IEnumerator LoadObjs (int spawn, string url)
+    public IEnumerator LoadObjs (int spawn, int texture, string url)
     {
        
             UnityWebRequest www = UnityWebRequest.Get(url);
@@ -45,7 +47,7 @@ public class ObjFromStream : MonoBehaviour {
             {
                 loadedObj.transform.GetChild(i).gameObject.AddComponent(typeof(Rigidbody));
                 loadedObj.transform.GetChild(i).gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
-                loadedObj.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().material = gM.marble;
+                loadedObj.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().material = gM.textures[texture];
                 loadedObj.transform.GetChild(i).gameObject.AddComponent<ObjSizing>();
             }
             for (int i = 0; i < gM.loadedObj.Count; i++)
@@ -69,9 +71,10 @@ public class ObjFromStream : MonoBehaviour {
     }
     public void ObjJson(string json)
     {
-        int position = int.Parse(getBetween(json, "{\"position\":", ",\"u"));
+        int position = int.Parse(getBetween(json, "{\"position\":", ",\"t"));
+        int texture = int.Parse(getBetween(json, "{\"texture\":", ",\"u"));
         string url = getBetween(json, "url\":\"", "\"}");
-        StartCoroutine(LoadObjs(position, url));
+        StartCoroutine(LoadObjs(position, texture, url));
         Debug.Log(position + " " + url);
 
     }
