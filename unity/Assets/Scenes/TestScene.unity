@@ -11789,7 +11789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2e058e62d785604b9726639e9b4f7f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsonArt: '{"size":0,"frame":0,"position":0,"url":"https://artsync.herokuapp.com/static_content/van-gogh-1.jpg"}'
+  jsonArt: '{"size":0,"frame":0,"position":1,"url":"https://artsync.herokuapp.com/static_content/van-gogh-1.jpg"}'
 --- !u!114 &1594521521
 MonoBehaviour:
   m_ObjectHideFlags: 0

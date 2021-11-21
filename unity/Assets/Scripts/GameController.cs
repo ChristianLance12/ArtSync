@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        marble = Resources.Load<Material>("Textures/Marble");
+   
         
     }
 
@@ -50,7 +50,7 @@ public class GameController : MonoBehaviour
 #endif
             }
         }
-        if (loadedItems >= totalItems && loadingScreen == enabled && totalItems != 0)
+        if (loadedItems >= totalItems && loadingScreen == enabled || totalItems == 0)
         {
             loadingScreen.SetActive(false);
         }

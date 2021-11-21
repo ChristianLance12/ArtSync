@@ -21,8 +21,8 @@ public class ObjFromStream : MonoBehaviour {
         {
             objSpawns[i].GetComponent<EmptyInspect>().position = i;
         }
-        StartCoroutine(LoadObjs(testSpawn, testUrl));
-      StartCoroutine(LoadObjs(testSpawn2, testUrl2));
+     //   StartCoroutine(LoadObjs(testSpawn, testUrl));
+     // StartCoroutine(LoadObjs(testSpawn2, testUrl2));
     }
     
     public IEnumerator LoadObjs (int spawn, string url)

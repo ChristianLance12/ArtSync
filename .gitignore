@@ -63,3 +63,6 @@ yarn-error.log*
 
 database.db
 ref
+static_content/Test.zip
+static_content/Test
+static_content/Test/Build/Test.data.gz
