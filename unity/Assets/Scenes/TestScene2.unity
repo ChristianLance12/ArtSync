@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 927474515}
-  m_IndirectSpecularColor: {r: 0.38522753, g: 0.47261494, b: 0.61848855, a: 1}
+  m_IndirectSpecularColor: {r: 0.3844336, g: 0.47180575, b: 0.6176565, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6646,6 +6646,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3134413713363427187, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
+      propertyPath: testJson
+      value: 0,0,https://groups.csail.mit.edu/graphics/classes/6.837/F03/models/cow-nonormals.obj
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134413713363427187, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
       propertyPath: testSpawn
       value: 0
       objectReference: {fileID: 0}
@@ -6661,6 +6665,10 @@ PrefabInstance:
       propertyPath: objSpawns.Array.data[1]
       value: 
       objectReference: {fileID: 543537591}
+    - target: {fileID: 7929488297503671722, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
+      propertyPath: jSon
+      value: 1,1,1,https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2FlQezinb283E%2Fmaxresdefault.jpg&f=1&nofb=1
+      objectReference: {fileID: 0}
     - target: {fileID: 7929488297503671722, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
       propertyPath: artSpawns.Array.data[0]
       value: 
@@ -7901,6 +7909,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   url: 
   position: 0
+  texture: 0
+  frame: 0
+  frameSize: 0
+  data: 
   view: {fileID: 1214138031104906520}
 --- !u!4 &1198438202632641577
 Transform:

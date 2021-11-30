@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class ArtLoad : MonoBehaviour
 {
-    // public string jSon;
+    public string jSon;
     public Transform[] artSpawns;
     public GameObject[] frameDimension;
     public Sprite[] frames;
@@ -19,7 +19,7 @@ public class ArtLoad : MonoBehaviour
             artSpawns[i].GetComponent<EmptyInspect>().position = i;
         }
 
-        // ArtJson(jSon);
+        ArtJson(jSon);
     }
 
     // Update is called once per frame
@@ -41,7 +41,8 @@ public class ArtLoad : MonoBehaviour
         artSpawns[spawn].gameObject.SetActive(false);
         art.GetComponent<SpriteRenderer>().sprite = loadedFrame;
         art.transform.GetChild(0).gameObject.GetComponent<Inspect>().position = spawn;
-        gM.loadedArt.Add(art.transform.GetChild(0).gameObject);
+        art.transform.GetChild(0).gameObject.GetComponent<Inspect>().frameSize = frameSize;
+        art.transform.GetChild(0).gameObject.GetComponent<Inspect>().frame = frame;
         StartCoroutine(GetTexture(url, art.transform.GetChild(0).gameObject));
     }
     IEnumerator GetTexture(string url, GameObject canvas)
@@ -59,20 +60,28 @@ public class ArtLoad : MonoBehaviour
             Texture myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
             canvas.GetComponent<Renderer>().material.mainTexture = myTexture;
             canvas.GetComponent<Inspect>().url = url;
+            canvas.GetComponent<Inspect>().DataCollectArt();
+
             gM.loadedItems += 1;
         }
     }
     public void ArtJson(string json)
     {
-        int frameSize = int.Parse(getBetween(json, "{\"size\":", ",\"frame"));
-        int frame = int.Parse(getBetween(json, "frame\":", ",\"p"));
-        int position = int.Parse(getBetween(json, "position\":", ",\"u"));
-        string url = getBetween(json, "url\":\"", "\"}");
+        /*  int frameSize = int.Parse(getBetween(json, "{\"size\":", ",\"frame"));
+          int frame = int.Parse(getBetween(json, "frame\":", ",\"p"));
+          int position = int.Parse(getBetween(json, "position\":", ",\"u"));
+          string url = getBetween(json, "url\":\"", "\"}"); 
+        */
+        string[] words = json.Split(',');
+        int frameSize = int.Parse(words[0]);
+        int frame = int.Parse(words[1]);
+        int position = int.Parse(words[2]);
+        string url = words[3];
         LoadArt(frameSize, frame, position, url);
-        Debug.Log(frameSize + " " + frame + " " + position + " " + url);
+      //  Debug.Log(frameSize + " " + frame + " " + position + " " + url);
             
     }
-    public static string getBetween(string strSource, string strStart, string strEnd)
+   /* public static string getBetween(string strSource, string strStart, string strEnd)
     {
         if (strSource.Contains(strStart) && strSource.Contains(strEnd))
         {
@@ -84,4 +93,5 @@ public class ArtLoad : MonoBehaviour
 
         return "";
     }
+   */
 }
