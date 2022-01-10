@@ -7,15 +7,20 @@ public class Inspect : MonoBehaviour
 {
    private bool inRange;
     public string url;
+   
     public int position;
+    public int texture;
+    public int frame;
+    public int frameSize;
+    public string data;
    private GameController gM;
     public GameObject view;
     
     void Start()
     {
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-      
-      
+        
+
     }
 
     void Update()
@@ -72,5 +77,15 @@ public class Inspect : MonoBehaviour
             inRange = false;
             gM.viewtxt.SetActive(false);
         }
+    }
+    public void DataCollectArt()
+    {
+        data = (frameSize + "," + frame + "," + position + "," + url);
+        Debug.Log(data);
+    }
+    public void DataCollectObj()
+    {
+        data = (position + "," + texture + "," + url);
+        Debug.Log(data);
     }
 }

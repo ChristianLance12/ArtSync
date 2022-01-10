@@ -76,7 +76,10 @@ public class EmptyInspect : MonoBehaviour
     }
     private void OnDisable()
     {
-        gM.viewtxt2.SetActive(false);
+        if (gM.viewtxt2 != null)
+        {
+            gM.viewtxt2.SetActive(false);
+        }
     }
 }
 

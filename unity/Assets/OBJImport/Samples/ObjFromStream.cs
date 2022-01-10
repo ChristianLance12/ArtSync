@@ -10,8 +10,7 @@ public class ObjFromStream : MonoBehaviour {
     public Transform[] objSpawns;
     public string testUrl;
     public string testUrl2;
-    public int testSpawn;
-    public int testSpawn2;
+    public string testJson;
     public GameObject cameraPrefab;
    
     void Start () {
@@ -21,11 +20,10 @@ public class ObjFromStream : MonoBehaviour {
         {
             objSpawns[i].GetComponent<EmptyInspect>().position = i;
         }
-        StartCoroutine(LoadObjs(testSpawn, testUrl));
-      StartCoroutine(LoadObjs(testSpawn2, testUrl2));
+        ObjJson(testJson);
     }
     
-    public IEnumerator LoadObjs (int spawn, string url)
+    public IEnumerator LoadObjs (int spawn, int texture, string url)
     {
        
             UnityWebRequest www = UnityWebRequest.Get(url);
@@ -45,7 +43,7 @@ public class ObjFromStream : MonoBehaviour {
             {
                 loadedObj.transform.GetChild(i).gameObject.AddComponent(typeof(Rigidbody));
                 loadedObj.transform.GetChild(i).gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
-                loadedObj.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().material = gM.marble;
+                loadedObj.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().material = gM.textures[texture];
                 loadedObj.transform.GetChild(i).gameObject.AddComponent<ObjSizing>();
             }
             for (int i = 0; i < gM.loadedObj.Count; i++)
@@ -63,19 +61,27 @@ public class ObjFromStream : MonoBehaviour {
             camera.transform.parent = loadedObj.transform;
             loadedObj.transform.GetChild(0).gameObject.AddComponent<Inspect>().view = camera;
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().url = url;
+            loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().texture = texture;
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().position = spawn;
+            loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().DataCollectObj();
         }
        
     }
     public void ObjJson(string json)
     {
-        int position = int.Parse(getBetween(json, "{\"position\":", ",\"u"));
-        string url = getBetween(json, "url\":\"", "\"}");
-        StartCoroutine(LoadObjs(position, url));
-        Debug.Log(position + " " + url);
-
+        /*  int position = int.Parse(getBetween(json, "{\"position\":", ",\"t"));
+          int texture = int.Parse(getBetween(json, "{\"texture\":", ",\"u"));
+          string url = getBetween(json, "url\":\"", "\"}");
+          StartCoroutine(LoadObjs(position, texture, url));
+          Debug.Log(position + " " + url);
+        */
+        string[] words = json.Split(',');
+        int position = int.Parse(words[0]);
+        int texture = int.Parse(words[1]);
+        string url = words[2];
+        StartCoroutine(LoadObjs(position, texture, url));
     }
-    public static string getBetween(string strSource, string strStart, string strEnd)
+   /* public static string getBetween(string strSource, string strStart, string strEnd)
     {
         if (strSource.Contains(strStart) && strSource.Contains(strEnd))
         {
@@ -87,4 +93,5 @@ public class ObjFromStream : MonoBehaviour {
 
         return "";
     }
+   */
 }

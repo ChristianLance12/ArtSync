@@ -34,7 +34,7 @@ public class ObjSizing : MonoBehaviour
         scale = 3 / max;
         transform.localScale = new Vector3(scale, scale, scale);
         gameObject.AddComponent(typeof(MeshCollider));
-       gameObject.GetComponent<MeshCollider>().convex = true;
+        gameObject.GetComponent<MeshCollider>().convex = true;
         gameObject.AddComponent<SphereCollider>();
         gameObject.GetComponent<SphereCollider>().radius = 4/scale;
         gameObject.GetComponent<SphereCollider>().isTrigger = true;
