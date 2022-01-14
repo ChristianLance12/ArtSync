@@ -13,8 +13,8 @@ public class GameController : MonoBehaviour
     public GameObject viewtxt2;
     public Text viewtxt2Text;
     public Material[] textures;
-        public string[] images;
-        public GameObject loadingScreen;
+    public string[] images;
+    public GameObject loadingScreen;
     public int loadedItems;
     public int totalItems;
     public List<GameObject> loadedArt = new List<GameObject>();
@@ -40,7 +40,7 @@ public class GameController : MonoBehaviour
 #endif
                 pauseUI.SetActive(true);
             }
-            else if (Input.GetKeyDown(KeyCode.Escape) && paused)
+            else if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Mouse0) && paused)
             {
 
                 UnPause();
