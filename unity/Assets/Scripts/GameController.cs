@@ -40,7 +40,7 @@ public class GameController : MonoBehaviour
 #endif
                 pauseUI.SetActive(true);
             }
-            else if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Mouse0) && paused)
+            else if (Input.GetKeyDown(KeyCode.Escape) && paused)
             {
 
                 UnPause();
