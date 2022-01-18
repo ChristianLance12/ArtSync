@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DeactiveRender : MonoBehaviour
+   
 {
-    // Start is called before the first frame update
+    private GameController gM;
+   
     void Start()
     {
-        GetComponent<MeshRenderer>().enabled = false;
+        gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+        if (gM.editor == false)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame

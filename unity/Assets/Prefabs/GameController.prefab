@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303431102858635469c31c9055c78abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  editor: 1
   paused: 0
   viewing: 0
   pauseUI: {fileID: 0}
@@ -53,12 +54,14 @@ MonoBehaviour:
   viewtxtText: {fileID: 0}
   viewtxt2: {fileID: 0}
   viewtxt2Text: {fileID: 0}
-  marble: {fileID: 0}
+  textures:
+  - {fileID: 2100000, guid: 81c7ae2386b1abf40828c9c2bb29720d, type: 2}
   images: []
   loadingScreen: {fileID: 0}
   loadedItems: 0
   totalItems: 0
   loadedArt: []
+  loadedObj: []
 --- !u!114 &3134413713363427187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,8 +79,7 @@ MonoBehaviour:
   - {fileID: 0}
   testUrl: https://groups.csail.mit.edu/graphics/classes/6.837/F03/models/teddy.obj
   testUrl2: https://groups.csail.mit.edu/graphics/classes/6.837/F03/models/cow-nonormals.obj
-  testSpawn: 1
-  testSpawn2: 2
+  testJson: 
   cameraPrefab: {fileID: 6798819194126486843, guid: c56b862e0af741f4ebc9add5b53f7e45, type: 3}
 --- !u!114 &7755060489827190205
 MonoBehaviour:
@@ -103,6 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 048e61475d3fff942b9349a0e24ee16c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jSon: 
   artSpawns:
   - {fileID: 0}
   - {fileID: 0}
