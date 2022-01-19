@@ -9,7 +9,9 @@ public class GameController : MonoBehaviour
     public bool paused;
     public bool viewing;
     public GameObject pauseUI;
+    public GameObject settingUI;
     public GameObject viewtxt;
+    public AudioSource music;
     public Text viewtxtText;
     public GameObject viewtxt2;
     public Text viewtxt2Text;
@@ -46,7 +48,8 @@ public class GameController : MonoBehaviour
 
                 UnPause();
                 pauseUI.SetActive(false);
-                #if !UNITY_EDITOR
+                settingUI.SetActive(false);
+#if !UNITY_EDITOR
                 WebGLPluginJS.OnUnityUnpause();
 #endif
             }
