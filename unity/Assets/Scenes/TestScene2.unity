@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 927474515}
-  m_IndirectSpecularColor: {r: 0.3844336, g: 0.47180575, b: 0.6176565, a: 1}
+  m_IndirectSpecularColor: {r: 0.38444096, g: 0.47178137, b: 0.6176216, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -321,11 +321,6 @@ Transform:
   m_Father: {fileID: 1788551373}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!82 &137059336 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 4977576820775579153, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
-  m_PrefabInstance: {fileID: 1940295866}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &176738016
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3117,6 +3112,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5388351800826481417, guid: 6f10a281eb43e92428140e8a6624b853, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797786695221644114, guid: 6f10a281eb43e92428140e8a6624b853, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9130697030522181200, guid: 6f10a281eb43e92428140e8a6624b853, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -6562,14 +6565,6 @@ PrefabInstance:
     - target: {fileID: 3134413713363427184, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
       propertyPath: m_Name
       value: GameController
-      objectReference: {fileID: 0}
-    - target: {fileID: 3134413713363427185, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
-      propertyPath: music
-      value: 
-      objectReference: {fileID: 137059336}
-    - target: {fileID: 3134413713363427185, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
-      propertyPath: editor
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3134413713363427185, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
       propertyPath: marble

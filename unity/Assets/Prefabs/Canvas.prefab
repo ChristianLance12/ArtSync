@@ -2883,8 +2883,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xSlider: {fileID: 2529387052051922989}
   ySlider: {fileID: 5939541252734335998}
-  music: {fileID: 0}
-  sFX: {fileID: 0}
+  music: {fileID: 8091257864558014564}
+  sFX: {fileID: 7036200262374476902}
 --- !u!1 &5640655914739918840
 GameObject:
   m_ObjectHideFlags: 0

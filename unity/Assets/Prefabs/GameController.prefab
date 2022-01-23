@@ -53,7 +53,7 @@ MonoBehaviour:
   pauseUI: {fileID: 0}
   settingUI: {fileID: 0}
   viewtxt: {fileID: 0}
-  music: {fileID: 0}
+  music: {fileID: 4977576820775579153}
   viewtxtText: {fileID: 0}
   viewtxt2: {fileID: 0}
   viewtxt2Text: {fileID: 0}
