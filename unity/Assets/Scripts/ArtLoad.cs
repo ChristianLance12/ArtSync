@@ -18,8 +18,10 @@ public class ArtLoad : MonoBehaviour
         {
             artSpawns[i].GetComponent<EmptyInspect>().position = i;
         }
+#if UNITY_EDITOR
+                ArtJson(jSon);
+#endif
 
-        ArtJson(jSon);
     }
 
     // Update is called once per frame

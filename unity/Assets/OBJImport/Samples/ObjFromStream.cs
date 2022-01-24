@@ -8,8 +8,6 @@ using UnityEngine.Networking;
 public class ObjFromStream : MonoBehaviour {
     private GameController gM;
     public Transform[] objSpawns;
-    public string testUrl;
-    public string testUrl2;
     public string testJson;
     public GameObject cameraPrefab;
    
@@ -20,7 +18,10 @@ public class ObjFromStream : MonoBehaviour {
         {
             objSpawns[i].GetComponent<EmptyInspect>().position = i;
         }
+#if UNITY_EDITOR
         ObjJson(testJson);
+#endif
+
     }
     
     public IEnumerator LoadObjs (int spawn, int texture, string url)
