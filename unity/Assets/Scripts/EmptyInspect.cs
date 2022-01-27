@@ -60,7 +60,7 @@ public class EmptyInspect : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && this.enabled == true)
         {
             inRange = true;
             gM.viewtxt2.SetActive(true);

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjSizing : MonoBehaviour
+public class ObjSizingS : MonoBehaviour
 {
     private float[] bounds = { 0, 0, 0 };
     private float max;
@@ -12,12 +12,12 @@ public class ObjSizing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ObjSize();
+        StartCoroutine(ObjSize());
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
 
     }
     // Update is called once per frame
-    public void ObjSize()
+    public IEnumerator ObjSize()
     {
         bounds[0] = GetComponent<MeshFilter>().mesh.bounds.size.x;
         bounds[1] = GetComponent<MeshFilter>().mesh.bounds.size.y;
@@ -31,12 +31,14 @@ public class ObjSizing : MonoBehaviour
             }
 
         }
-        scale = (float)2.5 / max;
+        scale = 1 / max;
         transform.localScale = new Vector3(scale, scale, scale);
+        yield return new WaitForSeconds(0.1f);
         gameObject.AddComponent(typeof(MeshCollider));
+        
         gameObject.GetComponent<MeshCollider>().convex = true;
         gameObject.AddComponent<SphereCollider>();
-        gameObject.GetComponent<SphereCollider>().radius = 3/scale;
+        gameObject.GetComponent<SphereCollider>().radius = 2/scale;
         gameObject.GetComponent<SphereCollider>().isTrigger = true;
     }
     private void OnCollisionEnter(Collision collision)

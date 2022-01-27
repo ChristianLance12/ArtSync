@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3134413713363427186}
   - component: {fileID: 3134413713363427185}
   - component: {fileID: 3134413713363427187}
+  - component: {fileID: 2606249758615208481}
   - component: {fileID: 7755060489827190205}
   - component: {fileID: 7929488297503671722}
   - component: {fileID: 4977576820775579153}
@@ -80,8 +81,21 @@ MonoBehaviour:
   objSpawns:
   - {fileID: 0}
   - {fileID: 0}
-  testUrl: https://groups.csail.mit.edu/graphics/classes/6.837/F03/models/teddy.obj
-  testUrl2: https://groups.csail.mit.edu/graphics/classes/6.837/F03/models/cow-nonormals.obj
+  testJson: 
+  cameraPrefab: {fileID: 6798819194126486843, guid: c56b862e0af741f4ebc9add5b53f7e45, type: 3}
+--- !u!114 &2606249758615208481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3134413713363427184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 089c8e4dd8ed7d94682421c0213c8e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objSpawns: []
   testJson: 
   cameraPrefab: {fileID: 6798819194126486843, guid: c56b862e0af741f4ebc9add5b53f7e45, type: 3}
 --- !u!114 &7755060489827190205

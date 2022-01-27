@@ -21,7 +21,8 @@ public class GameController : MonoBehaviour
     public int loadedItems;
     public int totalItems;
     public List<GameObject> loadedArt = new List<GameObject>();
-    public List<GameObject> loadedObj = new List<GameObject>();
+    public List<GameObject> loadedObjL = new List<GameObject>();
+    public List<GameObject> loadedObjS = new List<GameObject>();
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
