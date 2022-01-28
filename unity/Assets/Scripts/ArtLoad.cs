@@ -63,6 +63,7 @@ public class ArtLoad : MonoBehaviour
             canvas.GetComponent<Renderer>().material.mainTexture = myTexture;
             canvas.GetComponent<Inspect>().url = url;
             canvas.GetComponent<Inspect>().DataCollectArt();
+            canvas.GetComponent<Inspect>().type = Type.ART;
 
             gM.loadedItems += 1;
         }

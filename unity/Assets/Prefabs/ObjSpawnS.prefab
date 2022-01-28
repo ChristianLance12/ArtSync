@@ -235,7 +235,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92fe227f6d354f045a2dc12fa637104f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 1
   position: 0
+  positionS: 
   view: {fileID: 171187829255806307}
 --- !u!65 &34835842677643853
 BoxCollider:

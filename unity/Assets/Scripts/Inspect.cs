@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+public enum Type { ART, SOBJ, LOBJ }
 public class Inspect : MonoBehaviour
 {
+   
    private bool inRange;
     public string url;
-   
+    public Type type;
     public int position;
     public int texture;
     public int frame;
@@ -31,8 +32,21 @@ public class Inspect : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             view.SetActive(true);
             gM.viewing = true;
-           #if !UNITY_EDITOR
-            WebGLPluginJS.OnUnityInspect(url);
+
+#if !UNITY_EDITOR
+           if (type == Type.ART)
+            {
+                WebGLPluginJS.OnUnityInspect(data);
+            }
+            if (type == Type.LOBJ)
+            {
+                WebGLPluginJS.OnUnityLargeInspect(data);
+            }
+            if (type == Type.SOBJ)
+            {
+                WebGLPluginJS.OnUnitySmallInspect(data);
+            }  
+         
 #endif
 
         }

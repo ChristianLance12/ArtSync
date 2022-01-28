@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class EmptyInspect : MonoBehaviour
 {
+    public Type type;
     private bool inRange;
     public int position;
+    public string positionS;
     private GameController gM;
     public GameObject view;
 
     void Start()
     {
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-      
+        positionS = position.ToString();
 
     }
 
@@ -27,8 +29,20 @@ public class EmptyInspect : MonoBehaviour
                 view.SetActive(true);
             }
             gM.viewing = true;
+
 #if !UNITY_EDITOR
-            WebGLPluginJS.EmptyInspect();
+            if (type == Type.ART)
+            {
+                WebGLPluginJS.EmptyInspect(positionS);
+            }
+            if (type == Type.LOBJ)
+            {
+                WebGLPluginJS.EmptyLargeInspect(positionS);
+            }
+            if (type == Type.SOBJ)
+            {
+                WebGLPluginJS.EmptyInspect(positionS);
+            }
 #endif
 
 

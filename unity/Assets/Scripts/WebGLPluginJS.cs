@@ -8,6 +8,12 @@ public class WebGLPluginJS : MonoBehaviour
     public static extern void OnUnityInspect(string jsonString);
 
     [DllImport("__Internal")]
+    public static extern void OnUnityLargeInspect(string jsonString);
+
+    [DllImport("__Internal")]
+    public static extern void OnUnitySmallInspect(string jsonString);
+
+    [DllImport("__Internal")]
     public static extern void OnUnityUninspect();
 
     [DllImport("__Internal")]
@@ -17,7 +23,12 @@ public class WebGLPluginJS : MonoBehaviour
     public static extern void OnUnityUnpause();
 
     [DllImport("__Internal")]
-    public static extern void EmptyInspect();
+    public static extern void EmptyInspect(string position);
 
+    [DllImport("__Internal")]
+    public static extern void EmptyLargeInspect(string position);
+
+    [DllImport("__Internal")]
+    public static extern void EmptySmallInspect(string position);
 
 }

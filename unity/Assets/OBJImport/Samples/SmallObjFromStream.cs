@@ -68,6 +68,7 @@ public class SmallObjFromStream : MonoBehaviour {
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().texture = texture;
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().position = spawn;
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().DataCollectObj();
+            loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().type = Type.SOBJ;
         }
        
     }
