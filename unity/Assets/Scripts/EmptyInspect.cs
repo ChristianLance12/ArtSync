@@ -10,18 +10,20 @@ public class EmptyInspect : MonoBehaviour
     public string positionS;
     private GameController gM;
     public GameObject view;
-
+    private TestConsole tC;
     void Start()
     {
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-        positionS = position.ToString();
+#if UNITY_EDITOR
+        tC = GameObject.FindWithTag("TestConsole").GetComponent<TestConsole>();
 
+#endif
     }
 
     void Update()
     {
         //inspect/view action
-        if (inRange && Input.GetKeyDown(KeyCode.Space) && gM.viewing == false && gM.paused == false)
+        if (inRange && Input.GetKeyDown(KeyCode.Space) && gM.viewing == false && gM.paused == false && gM.loadingScreenOn == false)
         {
             Cursor.lockState = CursorLockMode.None;
             if (view != null)
@@ -44,10 +46,25 @@ public class EmptyInspect : MonoBehaviour
                 WebGLPluginJS.EmptyInspect(positionS);
             }
 #endif
+#if UNITY_EDITOR
+            if (type == Type.ART)
+            {
+                tC.ArtPos.text = positionS;
+                
+            }
+            if (type == Type.LOBJ)
+            {
+                tC.ObjPos.text = positionS;
+            }
+            if (type == Type.SOBJ)
+            {
+                tC.ObjSPos.text = positionS;
+            }
 
+#endif
 
         }
-        else if (inRange && Input.GetKeyDown(KeyCode.Space) && gM.viewing == true)
+        else if (inRange && Input.GetKeyDown(KeyCode.Space) && gM.viewing == true && gM.loadingScreenOn == false)
         {
             Cursor.lockState = CursorLockMode.Locked;
             if (view != null)

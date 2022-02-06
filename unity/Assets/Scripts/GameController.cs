@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     public bool editor;
     public bool paused;
     public bool viewing;
+    public bool loadingScreenOn;
     public GameObject pauseUI;
     public GameObject settingUI;
     public GameObject viewtxt;
@@ -33,7 +34,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (viewing == false)
+        if (viewing == false && loadingScreenOn == false)
         {
             if (Input.GetKeyDown(KeyCode.Escape) && paused == false)
             {
@@ -44,7 +45,7 @@ public class GameController : MonoBehaviour
 #endif
                 pauseUI.SetActive(true);
             }
-            else if (Input.GetKeyDown(KeyCode.Escape) && paused)
+            else if (Input.GetKeyDown(KeyCode.Escape) && paused && loadingScreenOn == false)
             {
 
                 UnPause();
@@ -58,6 +59,12 @@ public class GameController : MonoBehaviour
         if (loadedItems >= totalItems && loadingScreen == enabled || totalItems == 0)
         {
             loadingScreen.SetActive(false);
+            loadingScreenOn = false;
+        }
+        else if (loadedItems < totalItems)
+        {
+            loadingScreen.SetActive(true);
+            loadingScreenOn = true;
         }
     }
     public void Pause()

@@ -40,7 +40,7 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gM.viewing == false)
+        if (gM.viewing == false && gM.loadingScreenOn == false)
         {
             Vector3 rotInput = new Vector3(0, Input.GetAxis("Mouse X"), 0);
             Vector3 headInput = new Vector3(-Input.GetAxis("Mouse Y"), 0, 0);

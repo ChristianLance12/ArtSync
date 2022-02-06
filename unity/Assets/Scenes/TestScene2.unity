@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 927474515}
-  m_IndirectSpecularColor: {r: 0.3844336, g: 0.47180575, b: 0.6176565, a: 1}
+  m_IndirectSpecularColor: {r: 0.38444096, g: 0.47178137, b: 0.6176216, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2169,7 +2169,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 828311505}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -6837,6 +6837,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1003071617557423973, guid: a81150af026992a4086bd873e5415cf4, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1425882598899218483, guid: a81150af026992a4086bd873e5415cf4, type: 3}
+      propertyPath: m_Name
+      value: Loading
+      objectReference: {fileID: 0}
     - target: {fileID: 1425882598899218483, guid: a81150af026992a4086bd873e5415cf4, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -6904,6 +6912,10 @@ PrefabInstance:
     - target: {fileID: 3346503122380857796, guid: a81150af026992a4086bd873e5415cf4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3551890870515511459, guid: a81150af026992a4086bd873e5415cf4, type: 3}
+      propertyPath: animTime
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4037188370883125946, guid: a81150af026992a4086bd873e5415cf4, type: 3}
       propertyPath: m_AnchorMax.x
@@ -7160,6 +7172,10 @@ PrefabInstance:
     - target: {fileID: 7105572513756318604, guid: a81150af026992a4086bd873e5415cf4, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131731845146567234, guid: a81150af026992a4086bd873e5415cf4, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7615392555753420597, guid: a81150af026992a4086bd873e5415cf4, type: 3}
       propertyPath: m_FontData.m_Font

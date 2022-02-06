@@ -16,18 +16,21 @@ public class Inspect : MonoBehaviour
     public string data;
    private GameController gM;
     public GameObject view;
-    
+    private TestConsole tC;
     void Start()
     {
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-        
+#if UNITY_EDITOR
+        tC = GameObject.FindWithTag("TestConsole").GetComponent<TestConsole>();
+
+#endif
 
     }
 
     void Update()
     {
         //inspect/view action
-        if (inRange && Input.GetKeyDown(KeyCode.Space) && gM.viewing == false && gM.paused == false) 
+        if (inRange && Input.GetKeyDown(KeyCode.Space) && gM.viewing == false && gM.paused == false && gM.loadingScreenOn == false) 
         {
             Cursor.lockState = CursorLockMode.None;
             view.SetActive(true);
@@ -48,9 +51,25 @@ public class Inspect : MonoBehaviour
             }  
          
 #endif
+#if UNITY_EDITOR
+            if (type == Type.ART)
+            {
+                tC.ArtPos.text = position.ToString();
+
+            }
+            if (type == Type.LOBJ)
+            {
+                tC.ObjPos.text = position.ToString();
+            }
+            if (type == Type.SOBJ)
+            {
+                tC.ObjSPos.text = position.ToString();
+            }
+
+#endif
 
         }
-        else if (inRange && Input.GetKeyDown(KeyCode.Space) && gM.viewing == true)
+        else if (inRange && Input.GetKeyDown(KeyCode.Space) && gM.viewing == true && gM.loadingScreenOn == false)
         {
             Cursor.lockState = CursorLockMode.Locked;
             view.SetActive(false);

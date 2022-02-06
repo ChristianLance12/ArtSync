@@ -8,8 +8,6 @@ using UnityEngine.Networking;
 public class SmallObjFromStream : MonoBehaviour {
     private GameController gM;
     public Transform[] objSpawns;
-    public string testJson;
-    public string testJson2;
     public GameObject cameraPrefab;
    
     void Start () {
@@ -18,27 +16,26 @@ public class SmallObjFromStream : MonoBehaviour {
         for (int i = 0; i < objSpawns.Length; i++)
         {
             objSpawns[i].GetComponent<EmptyInspect>().position = i;
+            objSpawns[i].GetComponent<EmptyInspect>().positionS = i.ToString();
         }
-#if UNITY_EDITOR
-        ObjJson(testJson);
-        ObjJson(testJson2);
-#endif
+
 
     }
     
     public IEnumerator LoadObjs (int spawn, int texture, string url)
     {
-       
-            UnityWebRequest www = UnityWebRequest.Get(url);
+        gM.totalItems += 1;
+        UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
         if (www.result != UnityWebRequest.Result.Success)
         {
             Debug.Log(www.error);
+            gM.totalItems -= 1;
         }
         else
         {
             //create stream and load
-            gM.totalItems += 1;
+        
             var textStream = new MemoryStream(Encoding.UTF8.GetBytes(www.downloadHandler.text));
             var loadedObj = new OBJLoader().Load(textStream);
             loadedObj.transform.position = objSpawns[spawn].position;
@@ -55,11 +52,14 @@ public class SmallObjFromStream : MonoBehaviour {
                 {
                     Destroy(gM.loadedObjS[i].transform.parent.gameObject);
                     gM.loadedObjS.RemoveAt(i);
+                    gM.loadedItems -= 1;
+                    gM.totalItems -= 1;
                 }
             }
             gM.loadedObjS.Add(loadedObj.transform.GetChild(0).gameObject);
             var camera = Instantiate(cameraPrefab, new Vector3(loadedObj.transform.position.x + 4, loadedObj.transform.position.y - 2, loadedObj.transform.position.z), Quaternion.identity);
             objSpawns[spawn].GetComponent<EmptyInspect>().enabled = false;
+            objSpawns[spawn].GetComponent<EmptyInspect>().view.SetActive(false);
             camera.SetActive(false);
             camera.transform.parent = loadedObj.transform;
             
@@ -74,29 +74,12 @@ public class SmallObjFromStream : MonoBehaviour {
     }
     public void ObjJson(string json)
     {
-        /*  int position = int.Parse(getBetween(json, "{\"position\":", ",\"t"));
-          int texture = int.Parse(getBetween(json, "{\"texture\":", ",\"u"));
-          string url = getBetween(json, "url\":\"", "\"}");
-          StartCoroutine(LoadObjs(position, texture, url));
-          Debug.Log(position + " " + url);
-        */
+        
         string[] words = json.Split(',');
         int position = int.Parse(words[0]);
         int texture = int.Parse(words[1]);
         string url = words[2];
         StartCoroutine(LoadObjs(position, texture, url));
     }
-   /* public static string getBetween(string strSource, string strStart, string strEnd)
-    {
-        if (strSource.Contains(strStart) && strSource.Contains(strEnd))
-        {
-            int Start, End;
-            Start = strSource.IndexOf(strStart, 0) + strStart.Length;
-            End = strSource.IndexOf(strEnd, Start);
-            return strSource.Substring(Start, End - Start);
-        }
-
-        return "";
-    }
-   */
+  
 }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class LoadingTextAnimation : MonoBehaviour
 {
+    public float animTime;
     private Text text;
     void Start()
     {
@@ -16,13 +17,13 @@ public class LoadingTextAnimation : MonoBehaviour
     private IEnumerator Animate()
     {
         text.text = "LOADING...";
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(animTime);
         text.text = "LOADING   ";
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(animTime);
         text.text = "LOADING.  ";
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(animTime);
         text.text = "LOADING.. ";
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(animTime);
         StartCoroutine(Animate());
     }
 }
