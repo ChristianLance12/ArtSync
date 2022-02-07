@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 927474515}
-  m_IndirectSpecularColor: {r: 0.38444096, g: 0.47178137, b: 0.6176216, a: 1}
+  m_IndirectSpecularColor: {r: 0.38522753, g: 0.47261494, b: 0.61848855, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6718,7 +6718,7 @@ PrefabInstance:
       objectReference: {fileID: 543537591}
     - target: {fileID: 7929488297503671722, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
       propertyPath: jSon
-      value: 1,1,1,https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2FlQezinb283E%2Fmaxresdefault.jpg&f=1&nofb=1
+      value: 2,1,1,https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2FlQezinb283E%2Fmaxresdefault.jpg&f=1&nofb=1
       objectReference: {fileID: 0}
     - target: {fileID: 7929488297503671722, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
       propertyPath: artSpawns.Array.data[0]
@@ -6728,6 +6728,14 @@ PrefabInstance:
       propertyPath: artSpawns.Array.data[1]
       value: 
       objectReference: {fileID: 1209099768}
+    - target: {fileID: 7929488297503671722, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
+      propertyPath: frameDimension.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7929488297503671722, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
+      propertyPath: frameDimension.Array.data[2]
+      value: 
+      objectReference: {fileID: 8127300311673145213, guid: 79d8fe5720bf4b44da9e917240198b6b, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3e8bffc2b7b39c429731335d96c4c83, type: 3}
 --- !u!1001 &1960018030
