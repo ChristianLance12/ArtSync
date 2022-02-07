@@ -17,12 +17,13 @@ public class Inspect : MonoBehaviour
    private GameController gM;
     public GameObject view;
     private TestConsole tC;
+    private PlayerMove pM;
     void Start()
     {
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
 #if UNITY_EDITOR
         tC = GameObject.FindWithTag("TestConsole").GetComponent<TestConsole>();
-
+        pM = GameObject.FindWithTag("Player").GetComponent<PlayerMove>();
 #endif
 
     }
@@ -35,6 +36,8 @@ public class Inspect : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             view.SetActive(true);
             gM.viewing = true;
+            pM.footSteps1.Pause();
+            pM.footSteps2.Pause();
 
 #if !UNITY_EDITOR
            if (type == Type.ART)

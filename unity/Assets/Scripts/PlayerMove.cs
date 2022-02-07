@@ -84,7 +84,7 @@ public class PlayerMove : MonoBehaviour
             {
                 moving = false;
             }
-            if (gM.paused == false)
+            if (gM.paused == false && gM.viewing == false)
             {
                 if (sprinting == false)
                 {

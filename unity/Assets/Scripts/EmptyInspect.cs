@@ -11,12 +11,13 @@ public class EmptyInspect : MonoBehaviour
     private GameController gM;
     public GameObject view;
     private TestConsole tC;
+    private PlayerMove pM;
     void Start()
     {
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
 #if UNITY_EDITOR
         tC = GameObject.FindWithTag("TestConsole").GetComponent<TestConsole>();
-
+        pM = GameObject.FindWithTag("Player").GetComponent<PlayerMove>();
 #endif
     }
 
@@ -25,6 +26,8 @@ public class EmptyInspect : MonoBehaviour
         //inspect/view action
         if (inRange && Input.GetKeyDown(KeyCode.Space) && gM.viewing == false && gM.paused == false && gM.loadingScreenOn == false)
         {
+            pM.footSteps1.Pause();
+            pM.footSteps2.Pause();
             Cursor.lockState = CursorLockMode.None;
             if (view != null)
             {
