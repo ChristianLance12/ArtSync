@@ -8,7 +8,6 @@ using UnityEngine.Networking;
 public class ObjFromStream : MonoBehaviour {
     private GameController gM;
     public Transform[] objSpawns;
-    public string testJson;
     public GameObject cameraPrefab;
    
     void Start () {
@@ -17,26 +16,25 @@ public class ObjFromStream : MonoBehaviour {
         for (int i = 0; i < objSpawns.Length; i++)
         {
             objSpawns[i].GetComponent<EmptyInspect>().position = i;
+            objSpawns[i].GetComponent<EmptyInspect>().positionS = i.ToString();
         }
-#if UNITY_EDITOR
-       ObjJson(testJson);
-#endif
+
 
     }
     
     public IEnumerator LoadObjs (int spawn, int texture, string url)
     {
-       
-            UnityWebRequest www = UnityWebRequest.Get(url);
+        gM.totalItems += 1;
+        UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
         if (www.result != UnityWebRequest.Result.Success)
         {
-            Debug.Log(www.error);
+            Debug.Log(www.error); 
+            gM.totalItems -= 1;
         }
         else
         {
-            //create stream and load
-            gM.totalItems += 1;
+            //create stream and loa
             var textStream = new MemoryStream(Encoding.UTF8.GetBytes(www.downloadHandler.text));
             var loadedObj = new OBJLoader().Load(textStream);
             loadedObj.transform.position = objSpawns[spawn].position;
@@ -53,6 +51,8 @@ public class ObjFromStream : MonoBehaviour {
                 {
                     Destroy(gM.loadedObjL[i].transform.parent.gameObject);
                     gM.loadedObjL.RemoveAt(i);
+                    gM.loadedItems -= 1;
+                    gM.totalItems -= 1;
                 }
             }
             gM.loadedObjL.Add(loadedObj.transform.GetChild(0).gameObject);
@@ -71,30 +71,12 @@ public class ObjFromStream : MonoBehaviour {
     }
     public void ObjJson(string json)
     {
-      
-        /*  int position = int.Parse(getBetween(json, "{\"position\":", ",\"t"));
-          int texture = int.Parse(getBetween(json, "{\"texture\":", ",\"u"));
-          string url = getBetween(json, "url\":\"", "\"}");
-          StartCoroutine(LoadObjs(position, texture, url));
-          Debug.Log(position + " " + url);
-        */
+       
         string[] words = json.Split(',');
         int position = int.Parse(words[0]);
         int texture = int.Parse(words[1]);
         string url = words[2];
         StartCoroutine(LoadObjs(position, texture, url));
     }
-   /* public static string getBetween(string strSource, string strStart, string strEnd)
-    {
-        if (strSource.Contains(strStart) && strSource.Contains(strEnd))
-        {
-            int Start, End;
-            Start = strSource.IndexOf(strStart, 0) + strStart.Length;
-            End = strSource.IndexOf(strEnd, Start);
-            return strSource.Substring(Start, End - Start);
-        }
-
-        return "";
-    }
-   */
+   
 }
