@@ -34,11 +34,10 @@ public class ObjSizingS : MonoBehaviour
         scale = 1 / max;
         transform.localScale = new Vector3(scale, scale, scale);
         yield return new WaitForSeconds(0.5f);
-        gameObject.AddComponent(typeof(MeshCollider));
-        
+        gameObject.AddComponent(typeof(MeshCollider));  
         gameObject.GetComponent<MeshCollider>().convex = true;
         gameObject.AddComponent<SphereCollider>();
-        gameObject.GetComponent<SphereCollider>().radius = 2/scale;
+        gameObject.GetComponent<SphereCollider>().radius = 2.75f/scale;
         gameObject.GetComponent<SphereCollider>().isTrigger = true;
     }
     private void OnCollisionEnter(Collision collision)

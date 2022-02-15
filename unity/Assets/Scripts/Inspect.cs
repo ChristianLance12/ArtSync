@@ -31,11 +31,12 @@ public class Inspect : MonoBehaviour
     void Update()
     {
         //inspect/view action
-        if (inRange && Input.GetKeyDown(KeyCode.Space) && gM.viewing == false && gM.paused == false && gM.loadingScreenOn == false) 
+        if ((inRange || this.gameObject == gM.selected) && Input.GetKeyDown(KeyCode.Space) && gM.viewing == false && gM.paused == false && gM.loadingScreenOn == false) 
         {
             Cursor.lockState = CursorLockMode.None;
             view.SetActive(true);
             gM.viewing = true;
+            gM.selected = this.gameObject;
             pM.footSteps1.Pause();
             pM.footSteps2.Pause();
 
@@ -72,23 +73,28 @@ public class Inspect : MonoBehaviour
 #endif
 
         }
-        else if (inRange && Input.GetKeyDown(KeyCode.Space) && gM.viewing == true && gM.loadingScreenOn == false)
+        else if ((inRange || this.gameObject == gM.selected) && Input.GetKeyDown(KeyCode.Space) && gM.viewing == true && gM.loadingScreenOn == false)
         {
             Cursor.lockState = CursorLockMode.Locked;
             view.SetActive(false);
             gM.viewing = false;
-             #if !UNITY_EDITOR
+            gM.selected = null;
+            if (inRange == false)
+            {
+                gM.viewtxt.SetActive(false);
+            }
+#if !UNITY_EDITOR
             WebGLPluginJS.OnUnityUninspect();
 #endif
 
         }
         //inspect ui prompt
-        if (inRange && gM.viewing)
+        if ((inRange || this.gameObject == gM.selected) && gM.viewing)
         {
             gM.viewtxtText.text = "[Space] to stop";
 
         }
-        else if (inRange && gM.viewing == false)
+        else if ((inRange || this.gameObject == gM.selected) && gM.viewing == false)
         {
             gM.viewtxtText.text = "[Space] to inspect";
 
@@ -96,7 +102,7 @@ public class Inspect : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (CompareTag("Player"))
         {
             inRange = true;
             gM.viewtxt.SetActive(true);
@@ -108,7 +114,7 @@ public class Inspect : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if (CompareTag("Player"))
         {
             inRange = false;
             gM.viewtxt.SetActive(false);
@@ -123,5 +129,13 @@ public class Inspect : MonoBehaviour
     {
         data = (position + "," + texture + "," + url);
         Debug.Log(data);
+    }
+    private void OnDisable()
+    {
+        inRange = false;
+        if (gM.viewtxt != null)
+        {
+            gM.viewtxt.SetActive(false);
+        }
     }
 }

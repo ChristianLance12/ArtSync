@@ -16,7 +16,7 @@ public class ObjFromStream : MonoBehaviour {
         for (int i = 0; i < objSpawns.Length; i++)
         {
             objSpawns[i].GetComponent<EmptyInspect>().position = i;
-            objSpawns[i].GetComponent<EmptyInspect>().positionS = i.ToString();
+            
         }
 
 
@@ -66,8 +66,27 @@ public class ObjFromStream : MonoBehaviour {
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().position = spawn;
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().DataCollectObj();
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().type = Type.LOBJ;
+            gM.selected = loadedObj.transform.GetChild(0).gameObject;
+            gM.viewtxt.SetActive(true);
         }
        
+    }
+    public void DeleteObj(int position)
+    {
+        for (int i = 0; i < gM.loadedObjL.Count; i++)
+        {
+            if (gM.loadedObjL[i].GetComponent<Inspect>().position == position)
+            {
+                Destroy(gM.loadedObjL[i].transform.parent.gameObject);
+                gM.loadedObjL.RemoveAt(i);
+                gM.loadedItems -= 1;
+                gM.totalItems -= 1;
+
+            }
+        }
+        objSpawns[position].gameObject.SetActive(true);
+        gM.selected = objSpawns[position].gameObject;
+        gM.viewtxt2.SetActive(true);
     }
     public void ObjJson(string json)
     {
@@ -78,5 +97,9 @@ public class ObjFromStream : MonoBehaviour {
         string url = words[2];
         StartCoroutine(LoadObjs(position, texture, url));
     }
-   
+    public void ObjDeleteJson(string position)
+    {
+        int positionI = int.Parse(position);
+        DeleteObj(positionI);
+    }
 }

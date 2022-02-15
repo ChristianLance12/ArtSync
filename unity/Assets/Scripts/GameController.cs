@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+    public GameObject selected;
     public bool editor;
     public bool paused;
     public bool viewing;

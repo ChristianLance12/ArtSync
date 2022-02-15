@@ -65,7 +65,7 @@ public class TestConsole : MonoBehaviour
         try 
         { 
             string data = (ObjSPos.text + "," + ObjSText.text + "," + ObjSURL.text);
-            sL.ObjJson(data);
+            sL.ObjSJson(data);
         }
         catch
         {
@@ -89,7 +89,7 @@ public class TestConsole : MonoBehaviour
         try
         {
 
-            aL.ArtJson(ArtPos.text);
+            oL.ObjDeleteJson(ObjPos.text);
         }
         catch
         {
@@ -101,7 +101,7 @@ public class TestConsole : MonoBehaviour
         try
         {
 
-            aL.ArtJson(ArtPos.text);
+            sL.ObjSDeleteJson(ObjSPos.text);
         }
         catch
         {

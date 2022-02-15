@@ -16,7 +16,7 @@ public class ArtLoad : MonoBehaviour
         for (int i = 0; i < artSpawns.Length; i++)
         {
             artSpawns[i].GetComponent<EmptyInspect>().position = i;
-            artSpawns[i].GetComponent<EmptyInspect>().positionS = i.ToString();
+           
         }
 
 
@@ -48,6 +48,7 @@ public class ArtLoad : MonoBehaviour
         art.transform.GetChild(0).gameObject.GetComponent<Inspect>().position = spawn;
         art.transform.GetChild(0).gameObject.GetComponent<Inspect>().frameSize = frameSize;
         art.transform.GetChild(0).gameObject.GetComponent<Inspect>().frame = frame;
+        gM.selected = art.transform.GetChild(0).gameObject;
         StartCoroutine(GetTexture(url, art.transform.GetChild(0).gameObject));
     }
     IEnumerator GetTexture(string url, GameObject canvas)
@@ -68,8 +69,8 @@ public class ArtLoad : MonoBehaviour
             canvas.GetComponent<Inspect>().url = url;
             canvas.GetComponent<Inspect>().DataCollectArt();
             canvas.GetComponent<Inspect>().type = Type.ART;
-
             gM.loadedItems += 1;
+            gM.viewtxt.SetActive(true);
         }
     }
     public void DeleteArt(int position)
@@ -85,6 +86,9 @@ public class ArtLoad : MonoBehaviour
 
             }
         }
+        artSpawns[position].gameObject.SetActive(true);
+        gM.selected = artSpawns[position].gameObject;
+        gM.viewtxt2.SetActive(true);
     }
     public void ArtJson(string json)
     {

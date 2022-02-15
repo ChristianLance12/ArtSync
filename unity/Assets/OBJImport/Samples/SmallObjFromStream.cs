@@ -16,7 +16,7 @@ public class SmallObjFromStream : MonoBehaviour {
         for (int i = 0; i < objSpawns.Length; i++)
         {
             objSpawns[i].GetComponent<EmptyInspect>().position = i;
-            objSpawns[i].GetComponent<EmptyInspect>().positionS = i.ToString();
+            
         }
 
 
@@ -69,10 +69,30 @@ public class SmallObjFromStream : MonoBehaviour {
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().position = spawn;
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().DataCollectObj();
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().type = Type.SOBJ;
+            gM.selected = loadedObj.transform.GetChild(0).gameObject;
+            gM.viewtxt.SetActive(true);
         }
        
     }
-    public void ObjJson(string json)
+    public void DeleteObj(int position)
+    {
+        for (int i = 0; i < gM.loadedObjS.Count; i++)
+        {
+            if (gM.loadedObjS[i].GetComponent<Inspect>().position == position)
+            {
+                Destroy(gM.loadedObjS[i].transform.parent.gameObject);
+                gM.loadedObjS.RemoveAt(i);
+                gM.loadedItems -= 1;
+                gM.totalItems -= 1;
+
+            }
+        }
+        objSpawns[position].GetComponent<EmptyInspect>().enabled = true;
+        objSpawns[position].GetComponent<EmptyInspect>().view.SetActive(true);
+        gM.selected = objSpawns[position].gameObject;
+        gM.viewtxt2.SetActive(true);
+    }
+    public void ObjSJson(string json)
     {
         
         string[] words = json.Split(',');
@@ -81,5 +101,10 @@ public class SmallObjFromStream : MonoBehaviour {
         string url = words[2];
         StartCoroutine(LoadObjs(position, texture, url));
     }
-  
+    public void ObjSDeleteJson(string position)
+    {
+        int positionI = int.Parse(position);
+        DeleteObj(positionI);
+    }
+
 }
