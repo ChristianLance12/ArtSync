@@ -115,7 +115,7 @@ public class EmptyInspect : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             inRange = false;
             gM.viewtxt2.SetActive(false);
@@ -123,7 +123,7 @@ public class EmptyInspect : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && gM.viewing == false && this.enabled)
+        if (other.gameObject.CompareTag("Player") && gM.viewing == false && this.enabled)
         {
             inRange = true;
             gM.viewtxt2.SetActive(true);
@@ -146,6 +146,13 @@ public class EmptyInspect : MonoBehaviour
     {
         data = (position + "," + ",");
         Debug.Log(data);
+    }
+    void OnDrawGizmos()
+    {
+        // Draws a 5 unit long red line in front of the object
+        Gizmos.color = Color.red;
+        Vector3 direction = transform.TransformDirection(Vector3.forward) * 5;
+        Gizmos.DrawRay(transform.GetChild(0).position, direction);
     }
 }
 

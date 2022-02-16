@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3551197985101155655}
   - component: {fileID: 1126131415298198204}
   - component: {fileID: 1315746591727602611}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,3 +96,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32deb34c9bbb9b44afdffad26975c11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  right: 0
+  sObj: 0

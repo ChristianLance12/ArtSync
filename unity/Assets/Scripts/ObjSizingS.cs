@@ -37,12 +37,12 @@ public class ObjSizingS : MonoBehaviour
         gameObject.AddComponent(typeof(MeshCollider));  
         gameObject.GetComponent<MeshCollider>().convex = true;
         gameObject.AddComponent<SphereCollider>();
-        gameObject.GetComponent<SphereCollider>().radius = 2.75f/scale;
+        gameObject.GetComponent<SphereCollider>().radius = 2f/scale;
         gameObject.GetComponent<SphereCollider>().isTrigger = true;
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag != "Player" && done == false)
+        if (collision.gameObject.CompareTag("Pedestal") && done == false)
         {
             gM.loadedItems += 1;
             done = true;

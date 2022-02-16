@@ -102,7 +102,7 @@ public class Inspect : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             inRange = true;
             gM.viewtxt.SetActive(true);
@@ -114,7 +114,7 @@ public class Inspect : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             inRange = false;
             gM.viewtxt.SetActive(false);

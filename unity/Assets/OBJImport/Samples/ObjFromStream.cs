@@ -66,6 +66,7 @@ public class ObjFromStream : MonoBehaviour {
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().position = spawn;
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().DataCollectObj();
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().type = Type.LOBJ;
+            loadedObj.transform.rotation = Quaternion.Euler(objSpawns[spawn].eulerAngles.x, objSpawns[spawn].eulerAngles.y + 90, objSpawns[spawn].eulerAngles.z);
             gM.selected = loadedObj.transform.GetChild(0).gameObject;
             gM.viewtxt.SetActive(true);
         }

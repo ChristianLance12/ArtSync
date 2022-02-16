@@ -35,7 +35,7 @@ public class SmallObjFromStream : MonoBehaviour {
         else
         {
             //create stream and load
-        
+
             var textStream = new MemoryStream(Encoding.UTF8.GetBytes(www.downloadHandler.text));
             var loadedObj = new OBJLoader().Load(textStream);
             loadedObj.transform.position = objSpawns[spawn].position;
@@ -57,10 +57,11 @@ public class SmallObjFromStream : MonoBehaviour {
                 }
             }
             gM.loadedObjS.Add(loadedObj.transform.GetChild(0).gameObject);
-            var camera = Instantiate(cameraPrefab, new Vector3(loadedObj.transform.position.x + 4, loadedObj.transform.position.y - 2, loadedObj.transform.position.z), Quaternion.identity);
+            var camera = Instantiate(cameraPrefab, new Vector3(loadedObj.transform.position.x - 3, loadedObj.transform.position.y, loadedObj.transform.position.z), Quaternion.identity);
             objSpawns[spawn].GetComponent<EmptyInspect>().enabled = false;
             objSpawns[spawn].GetComponent<EmptyInspect>().view.SetActive(false);
             camera.SetActive(false);
+            camera.GetComponent<ObjCamera>().sObj = true;
             camera.transform.parent = loadedObj.transform;
             
             loadedObj.transform.GetChild(0).gameObject.AddComponent<Inspect>().view = camera;
@@ -69,6 +70,7 @@ public class SmallObjFromStream : MonoBehaviour {
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().position = spawn;
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().DataCollectObj();
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().type = Type.SOBJ;
+            loadedObj.transform.rotation = Quaternion.Euler(objSpawns[spawn].eulerAngles.x, objSpawns[spawn].eulerAngles.y + 90, objSpawns[spawn].eulerAngles.z);
             gM.selected = loadedObj.transform.GetChild(0).gameObject;
             gM.viewtxt.SetActive(true);
         }

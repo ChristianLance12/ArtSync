@@ -38,6 +38,7 @@ public class ObjSizing : MonoBehaviour
         gameObject.AddComponent<SphereCollider>();
         gameObject.GetComponent<SphereCollider>().radius = 3/scale;
         gameObject.GetComponent<SphereCollider>().isTrigger = true;
+       
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -46,6 +47,13 @@ public class ObjSizing : MonoBehaviour
             gM.loadedItems += 1;
             done = true;
         }
+    }
+    void OnDrawGizmos()
+    {
+        // Draws a 5 unit long red line in front of the object
+        Gizmos.color = Color.red;
+        Vector3 direction = transform.TransformDirection(Vector3.forward) * 5;
+        Gizmos.DrawRay(transform.position, direction);
     }
 }
 
