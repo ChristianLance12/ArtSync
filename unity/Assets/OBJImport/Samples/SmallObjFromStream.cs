@@ -43,6 +43,7 @@ public class SmallObjFromStream : MonoBehaviour {
             {
                 loadedObj.transform.GetChild(i).gameObject.AddComponent(typeof(Rigidbody));
                 loadedObj.transform.GetChild(i).gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+                loadedObj.transform.GetChild(i).gameObject.GetComponent<Rigidbody>().mass = 100;
                 loadedObj.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().material = gM.textures[texture];
                 loadedObj.transform.GetChild(i).gameObject.AddComponent<ObjSizingS>();
             }
@@ -57,7 +58,7 @@ public class SmallObjFromStream : MonoBehaviour {
                 }
             }
             gM.loadedObjS.Add(loadedObj.transform.GetChild(0).gameObject);
-            var camera = Instantiate(cameraPrefab, new Vector3(loadedObj.transform.position.x - 3, loadedObj.transform.position.y, loadedObj.transform.position.z), Quaternion.identity);
+            var camera = Instantiate(cameraPrefab, new Vector3(loadedObj.transform.position.x - 2.5f, loadedObj.transform.position.y - 1f, loadedObj.transform.position.z), Quaternion.identity);
             objSpawns[spawn].GetComponent<EmptyInspect>().enabled = false;
             objSpawns[spawn].GetComponent<EmptyInspect>().view.SetActive(false);
             camera.SetActive(false);

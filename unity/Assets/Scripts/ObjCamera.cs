@@ -7,6 +7,7 @@ public class ObjCamera : MonoBehaviour
     private GameController gM;
     public float distance;
     private Vector3 previousLoc;
+    private float rotDist = 4f;
     private bool right;
     private bool firstRotDone;
     public bool sObj;
@@ -25,25 +26,43 @@ public class ObjCamera : MonoBehaviour
         {
             if (right == true)
             {
-                transform.Translate(Vector3.right * Time.deltaTime);
+                if (sObj == true)
+                {
+                    transform.Translate(Vector3.right * Time.deltaTime * 0.65f);
+                }
+                else
+                {
+                    transform.Translate(Vector3.right * Time.deltaTime);
+                }
             }
             else
             {
-                transform.Translate(Vector3.left * Time.deltaTime);
-            } 
-        }
-        if (sObj == true)
-        {
-           
-                distance += Vector3.Distance(transform.position, previousLoc);
-                previousLoc = transform.position;            
-            if ((distance >= 16.58576 && firstRotDone == false && switcher == false ) || (distance >= 33.17152 && switcher == false))
-            {
-                StartCoroutine(changeBool());
-                
+                if (sObj == true)
+                {
+                    transform.Translate(Vector3.left * Time.deltaTime * 0.65f);
+                }
+                else
+                {
+                    transform.Translate(Vector3.left * Time.deltaTime);
+                }
             }
+            if (sObj == true)
+            {
+                if (previousLoc.x != 0 && previousLoc.y != 0 && previousLoc.z != 0)
+                {
+                    distance += Vector3.Distance(transform.position, previousLoc);
+                }
+                
+                previousLoc = transform.position;
+                if ((distance >= rotDist && firstRotDone == false && switcher == false) || (distance >= (rotDist*2) && switcher == false))
+                {
+                    StartCoroutine(changeBool());
+
+                }
+            }
+
         }
-        
+
     }
     private IEnumerator changeBool()
     {

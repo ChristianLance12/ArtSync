@@ -817,6 +817,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2332738255438389274, guid: c018d60182e172342b711768dbb28a39, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.7
+      objectReference: {fileID: 0}
     - target: {fileID: 5155807569158141569, guid: c018d60182e172342b711768dbb28a39, type: 3}
       propertyPath: m_Name
       value: LObjSpawn
@@ -3266,14 +3270,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5388351800826481417, guid: 6f10a281eb43e92428140e8a6624b853, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7797786695221644114, guid: 6f10a281eb43e92428140e8a6624b853, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9130697030522181200, guid: 6f10a281eb43e92428140e8a6624b853, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -3317,6 +3313,10 @@ PrefabInstance:
     - target: {fileID: 9130697030522181200, guid: 6f10a281eb43e92428140e8a6624b853, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9130697030522181206, guid: 6f10a281eb43e92428140e8a6624b853, type: 3}
+      propertyPath: m_Mass
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 9130697030522181228, guid: 6f10a281eb43e92428140e8a6624b853, type: 3}
       propertyPath: m_Name
