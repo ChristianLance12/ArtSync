@@ -16,7 +16,7 @@ public class ObjFromStream : MonoBehaviour {
         for (int i = 0; i < objSpawns.Length; i++)
         {
             objSpawns[i].GetComponent<EmptyInspect>().position = i;
-            objSpawns[i].GetComponent<EmptyInspect>().positionS = i.ToString();
+            
         }
 
 
@@ -42,6 +42,7 @@ public class ObjFromStream : MonoBehaviour {
             {
                 loadedObj.transform.GetChild(i).gameObject.AddComponent(typeof(Rigidbody));
                 loadedObj.transform.GetChild(i).gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+                loadedObj.transform.GetChild(i).gameObject.GetComponent<Rigidbody>().mass = 100;
                 loadedObj.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().material = gM.textures[texture];
                 loadedObj.transform.GetChild(i).gameObject.AddComponent<ObjSizing>();
             }
@@ -56,7 +57,7 @@ public class ObjFromStream : MonoBehaviour {
                 }
             }
             gM.loadedObjL.Add(loadedObj.transform.GetChild(0).gameObject);
-            var camera = Instantiate(cameraPrefab, new Vector3(loadedObj.transform.position.x + 4, loadedObj.transform.position.y - 2, loadedObj.transform.position.z), Quaternion.identity);
+            var camera = Instantiate(cameraPrefab, new Vector3(loadedObj.transform.position.x - 4, loadedObj.transform.position.y - 1.5f, loadedObj.transform.position.z), Quaternion.identity);
             objSpawns[spawn].gameObject.SetActive(false);
             camera.SetActive(false);
             camera.transform.parent = loadedObj.transform;
@@ -66,8 +67,28 @@ public class ObjFromStream : MonoBehaviour {
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().position = spawn;
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().DataCollectObj();
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().type = Type.LOBJ;
+            loadedObj.transform.rotation = Quaternion.Euler(objSpawns[spawn].eulerAngles.x, objSpawns[spawn].eulerAngles.y + 90, objSpawns[spawn].eulerAngles.z);
+            gM.selected = loadedObj.transform.GetChild(0).gameObject;
+            gM.viewtxt.SetActive(true);
         }
        
+    }
+    public void DeleteObj(int position)
+    {
+        for (int i = 0; i < gM.loadedObjL.Count; i++)
+        {
+            if (gM.loadedObjL[i].GetComponent<Inspect>().position == position)
+            {
+                Destroy(gM.loadedObjL[i].transform.parent.gameObject);
+                gM.loadedObjL.RemoveAt(i);
+                gM.loadedItems -= 1;
+                gM.totalItems -= 1;
+
+            }
+        }
+        objSpawns[position].gameObject.SetActive(true);
+        gM.selected = objSpawns[position].gameObject;
+        gM.viewtxt2.SetActive(true);
     }
     public void ObjJson(string json)
     {
@@ -78,5 +99,9 @@ public class ObjFromStream : MonoBehaviour {
         string url = words[2];
         StartCoroutine(LoadObjs(position, texture, url));
     }
-   
+    public void ObjDeleteJson(string position)
+    {
+        int positionI = int.Parse(position);
+        DeleteObj(positionI);
+    }
 }

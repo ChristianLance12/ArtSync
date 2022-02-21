@@ -16,7 +16,7 @@ public class SmallObjFromStream : MonoBehaviour {
         for (int i = 0; i < objSpawns.Length; i++)
         {
             objSpawns[i].GetComponent<EmptyInspect>().position = i;
-            objSpawns[i].GetComponent<EmptyInspect>().positionS = i.ToString();
+            
         }
 
 
@@ -35,7 +35,7 @@ public class SmallObjFromStream : MonoBehaviour {
         else
         {
             //create stream and load
-        
+
             var textStream = new MemoryStream(Encoding.UTF8.GetBytes(www.downloadHandler.text));
             var loadedObj = new OBJLoader().Load(textStream);
             loadedObj.transform.position = objSpawns[spawn].position;
@@ -43,6 +43,7 @@ public class SmallObjFromStream : MonoBehaviour {
             {
                 loadedObj.transform.GetChild(i).gameObject.AddComponent(typeof(Rigidbody));
                 loadedObj.transform.GetChild(i).gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+                loadedObj.transform.GetChild(i).gameObject.GetComponent<Rigidbody>().mass = 100;
                 loadedObj.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().material = gM.textures[texture];
                 loadedObj.transform.GetChild(i).gameObject.AddComponent<ObjSizingS>();
             }
@@ -57,10 +58,11 @@ public class SmallObjFromStream : MonoBehaviour {
                 }
             }
             gM.loadedObjS.Add(loadedObj.transform.GetChild(0).gameObject);
-            var camera = Instantiate(cameraPrefab, new Vector3(loadedObj.transform.position.x + 4, loadedObj.transform.position.y - 2, loadedObj.transform.position.z), Quaternion.identity);
+            var camera = Instantiate(cameraPrefab, new Vector3(loadedObj.transform.position.x - 2.5f, loadedObj.transform.position.y - 1f, loadedObj.transform.position.z), Quaternion.identity);
             objSpawns[spawn].GetComponent<EmptyInspect>().enabled = false;
             objSpawns[spawn].GetComponent<EmptyInspect>().view.SetActive(false);
             camera.SetActive(false);
+            camera.GetComponent<ObjCamera>().sObj = true;
             camera.transform.parent = loadedObj.transform;
             
             loadedObj.transform.GetChild(0).gameObject.AddComponent<Inspect>().view = camera;
@@ -69,10 +71,31 @@ public class SmallObjFromStream : MonoBehaviour {
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().position = spawn;
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().DataCollectObj();
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().type = Type.SOBJ;
+            loadedObj.transform.rotation = Quaternion.Euler(objSpawns[spawn].eulerAngles.x, objSpawns[spawn].eulerAngles.y + 90, objSpawns[spawn].eulerAngles.z);
+            gM.selected = loadedObj.transform.GetChild(0).gameObject;
+            gM.viewtxt.SetActive(true);
         }
        
     }
-    public void ObjJson(string json)
+    public void DeleteObj(int position)
+    {
+        for (int i = 0; i < gM.loadedObjS.Count; i++)
+        {
+            if (gM.loadedObjS[i].GetComponent<Inspect>().position == position)
+            {
+                Destroy(gM.loadedObjS[i].transform.parent.gameObject);
+                gM.loadedObjS.RemoveAt(i);
+                gM.loadedItems -= 1;
+                gM.totalItems -= 1;
+
+            }
+        }
+        objSpawns[position].GetComponent<EmptyInspect>().enabled = true;
+        objSpawns[position].GetComponent<EmptyInspect>().view.SetActive(true);
+        gM.selected = objSpawns[position].gameObject;
+        gM.viewtxt2.SetActive(true);
+    }
+    public void ObjSJson(string json)
     {
         
         string[] words = json.Split(',');
@@ -81,5 +104,10 @@ public class SmallObjFromStream : MonoBehaviour {
         string url = words[2];
         StartCoroutine(LoadObjs(position, texture, url));
     }
-  
+    public void ObjSDeleteJson(string position)
+    {
+        int positionI = int.Parse(position);
+        DeleteObj(positionI);
+    }
+
 }

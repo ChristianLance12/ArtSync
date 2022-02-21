@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EmptyObjCamera : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public bool sObj;
+    public GameObject pedestal;
     void Start()
     {
         
@@ -13,7 +14,10 @@ public class EmptyObjCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(gameObject.transform.parent);
-        transform.Translate(Vector3.right * Time.deltaTime);
+        if (sObj == true)
+        {
+          //  transform.LookAt(pedestal.transform);
+            // transform.Translate(Vector3.right * Time.deltaTime * 0.65f);
+        }
     }
 }
