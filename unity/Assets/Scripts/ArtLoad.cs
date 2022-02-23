@@ -92,6 +92,10 @@ public class ArtLoad : MonoBehaviour
     }
     public void ArtJson(string json)
     {
+        gM.loadingDataArt.Add(json);
+    }
+    public void ArtParse(string json)
+    {
        
         string[] words = json.Split(',');
         int frameSize = int.Parse(words[0]);

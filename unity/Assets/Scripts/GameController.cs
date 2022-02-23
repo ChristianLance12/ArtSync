@@ -25,6 +25,19 @@ public class GameController : MonoBehaviour
     public List<GameObject> loadedArt = new List<GameObject>();
     public List<GameObject> loadedObjL = new List<GameObject>();
     public List<GameObject> loadedObjS = new List<GameObject>();
+    public List<string> loadingDataArt = new List<string>();
+    public List<string> loadingDataObj = new List<string>();
+    public List<string> loadingDataSObj = new List<string>();
+    public bool loading;
+    private ArtLoad aL;
+    private ObjFromStream oL;
+    private SmallObjFromStream sL;
+    void Awake()
+    {
+        aL = GetComponent<ArtLoad>();
+        oL = GetComponent<ObjFromStream>();
+        sL = GetComponent<SmallObjFromStream>();
+    }
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -35,6 +48,14 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (loading == false && (loadingDataArt.Count > 0 || loadingDataObj.Count > 0 || loadingDataSObj.Count > 0))
+        {
+            if (loadingDataArt.Count > 0)
+            {
+                aL.ArtParse(loadingDataArt[0]);
+                loading = true;
+            }
+        }
         if (viewing == false && loadingScreenOn == false)
         {
             if (Input.GetKeyDown(KeyCode.Escape) && paused == false)
