@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour
     private ArtLoad aL;
     private ObjFromStream oL;
     private SmallObjFromStream sL;
+    public bool introLoad = true;
     void Awake()
     {
         aL = GetComponent<ArtLoad>();
@@ -41,7 +42,6 @@ public class GameController : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-   
         
     }
 
@@ -54,7 +54,21 @@ public class GameController : MonoBehaviour
             {
                 aL.ArtParse(loadingDataArt[0]);
                 loading = true;
+                loadingDataArt.RemoveAt(0);
             }
+            else if (loadingDataObj.Count > 0)
+            {
+                oL.ObjParse(loadingDataObj[0]);
+                loading = true;
+                loadingDataObj.RemoveAt(0);
+            }
+           else if (loadingDataSObj.Count > 0)
+            {
+                sL.ObjSParse(loadingDataSObj[0]);
+                loading = true;
+                loadingDataSObj.RemoveAt(0);
+            }
+            
         }
         if (viewing == false && loadingScreenOn == false)
         {
@@ -80,6 +94,12 @@ public class GameController : MonoBehaviour
         }
         if (loadedItems >= totalItems && loadingScreen == enabled || totalItems == 0)
         {
+            if (introLoad == true)
+            {
+                selected = null;
+                introLoad = false;
+                viewtxt.SetActive(false);
+            }
             loadingScreen.SetActive(false);
             loadingScreenOn = false;
         }
@@ -101,5 +121,6 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1;
         paused = false;
     }
+ 
 }
  

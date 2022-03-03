@@ -9,22 +9,25 @@ public class SmallObjFromStream : MonoBehaviour {
     private GameController gM;
     public Transform[] objSpawns;
     public GameObject cameraPrefab;
-   
-    void Start () {
-        //make www
+    void Awake()
+    {
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+    }
+    void Start() {
+        //make www
+       
         for (int i = 0; i < objSpawns.Length; i++)
         {
             objSpawns[i].GetComponent<EmptyInspect>().position = i;
-            
+
         }
 
 
     }
-    
-    public IEnumerator LoadObjs (int spawn, int texture, string url)
+
+    public IEnumerator LoadObjs(int spawn, int texture, string url)
     {
-        gM.totalItems += 1;
+    
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
         if (www.result != UnityWebRequest.Result.Success)
@@ -64,7 +67,7 @@ public class SmallObjFromStream : MonoBehaviour {
             camera.SetActive(false);
             camera.GetComponent<ObjCamera>().sObj = true;
             camera.transform.parent = loadedObj.transform;
-            
+
             loadedObj.transform.GetChild(0).gameObject.AddComponent<Inspect>().view = camera;
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().url = url;
             loadedObj.transform.GetChild(0).gameObject.GetComponent<Inspect>().texture = texture;
@@ -74,8 +77,9 @@ public class SmallObjFromStream : MonoBehaviour {
             loadedObj.transform.rotation = Quaternion.Euler(objSpawns[spawn].eulerAngles.x, objSpawns[spawn].eulerAngles.y + 90, objSpawns[spawn].eulerAngles.z);
             gM.selected = loadedObj.transform.GetChild(0).gameObject;
             gM.viewtxt.SetActive(true);
+
         }
-       
+
     }
     public void DeleteObj(int position)
     {
@@ -94,8 +98,14 @@ public class SmallObjFromStream : MonoBehaviour {
         objSpawns[position].GetComponent<EmptyInspect>().view.SetActive(true);
         gM.selected = objSpawns[position].gameObject;
         gM.viewtxt2.SetActive(true);
+
     }
     public void ObjSJson(string json)
+    {
+        gM.loadingDataSObj.Add(json);
+        gM.totalItems += 1;
+    }
+    public void ObjSParse(string json)
     {
         
         string[] words = json.Split(',');

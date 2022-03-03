@@ -10,15 +10,20 @@ public class ObjSizing : MonoBehaviour
     private bool done;
     private GameController gM;
     // Start is called before the first frame update
+    void Awake()
+    {
+        gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+    }
     void Start()
     {
         ObjSize();
-        gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+    
 
     }
     // Update is called once per frame
     public void ObjSize()
     {
+        gM.loading = false;
         bounds[0] = GetComponent<MeshFilter>().mesh.bounds.size.x;
         bounds[1] = GetComponent<MeshFilter>().mesh.bounds.size.y;
         bounds[2] = GetComponent<MeshFilter>().mesh.bounds.size.z;
@@ -45,6 +50,7 @@ public class ObjSizing : MonoBehaviour
         if (collision.gameObject.tag != "Player" && done == false)
         {
             gM.loadedItems += 1;
+           
             done = true;
         }
     }

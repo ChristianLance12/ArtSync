@@ -9,10 +9,14 @@ public class ObjFromStream : MonoBehaviour {
     private GameController gM;
     public Transform[] objSpawns;
     public GameObject cameraPrefab;
-   
+
+    void Awake()
+    {
+        gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+    }
     void Start () {
         //make www
-        gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+        
         for (int i = 0; i < objSpawns.Length; i++)
         {
             objSpawns[i].GetComponent<EmptyInspect>().position = i;
@@ -24,7 +28,7 @@ public class ObjFromStream : MonoBehaviour {
     
     public IEnumerator LoadObjs (int spawn, int texture, string url)
     {
-        gM.totalItems += 1;
+        
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
         if (www.result != UnityWebRequest.Result.Success)
@@ -89,8 +93,14 @@ public class ObjFromStream : MonoBehaviour {
         objSpawns[position].gameObject.SetActive(true);
         gM.selected = objSpawns[position].gameObject;
         gM.viewtxt2.SetActive(true);
+
     }
     public void ObjJson(string json)
+    {
+        gM.loadingDataObj.Add(json);
+        gM.totalItems += 1;
+    }
+    public void ObjParse(string json)
     {
        
         string[] words = json.Split(',');

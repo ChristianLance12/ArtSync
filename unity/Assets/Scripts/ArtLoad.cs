@@ -10,9 +10,12 @@ public class ArtLoad : MonoBehaviour
     public Sprite[] frames;
     private GameController gM;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+    }
+    void Start()
+    {
         for (int i = 0; i < artSpawns.Length; i++)
         {
             artSpawns[i].GetComponent<EmptyInspect>().position = i;
@@ -25,7 +28,7 @@ public class ArtLoad : MonoBehaviour
     // Update is called once per frame
     public void LoadArt(int frameSize, int frame, int spawn, string url)
     {
-        gM.totalItems += 1;
+       
         for (int i = 0; i < gM.loadedArt.Count; i++)
         {
             if (gM.loadedArt[i].GetComponent<Inspect>().position == spawn)
@@ -70,6 +73,7 @@ public class ArtLoad : MonoBehaviour
             canvas.GetComponent<Inspect>().DataCollectArt();
             canvas.GetComponent<Inspect>().type = Type.ART;
             gM.loadedItems += 1;
+            gM.loading = false;
             gM.viewtxt.SetActive(true);
         }
     }
@@ -93,6 +97,7 @@ public class ArtLoad : MonoBehaviour
     public void ArtJson(string json)
     {
         gM.loadingDataArt.Add(json);
+        gM.totalItems += 1;
     }
     public void ArtParse(string json)
     {
