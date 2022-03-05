@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
     public GameObject settingUI;
     public GameObject viewtxt;
     public AudioSource music;
+    public AudioSource hoverUI;
     public Text viewtxtText;
     public GameObject viewtxt2;
     public Text viewtxt2Text;
@@ -32,12 +33,14 @@ public class GameController : MonoBehaviour
     private ArtLoad aL;
     private ObjFromStream oL;
     private SmallObjFromStream sL;
+    private PlayerMove pM;
     public bool introLoad = true;
     void Awake()
     {
         aL = GetComponent<ArtLoad>();
         oL = GetComponent<ObjFromStream>();
         sL = GetComponent<SmallObjFromStream>();
+        pM = GameObject.FindWithTag("Player").GetComponent<PlayerMove>();
     }
     void Start()
     {
@@ -111,6 +114,8 @@ public class GameController : MonoBehaviour
     }
     public void Pause()
     {
+        pM.footSteps1.Pause();
+        pM.footSteps2.Pause();
         Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0;
         paused = true;

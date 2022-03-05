@@ -9,12 +9,12 @@ public class SmallObjFromStream : MonoBehaviour {
     private GameController gM;
     public Transform[] objSpawns;
     public GameObject cameraPrefab;
+    public AudioSource placeSnd;
     void Awake()
     {
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
     }
     void Start() {
-        //make www
        
         for (int i = 0; i < objSpawns.Length; i++)
         {
@@ -38,7 +38,10 @@ public class SmallObjFromStream : MonoBehaviour {
         else
         {
             //create stream and load
-
+            if (gM.viewing == true)
+            {
+                placeSnd.Play();
+            }
             var textStream = new MemoryStream(Encoding.UTF8.GetBytes(www.downloadHandler.text));
             var loadedObj = new OBJLoader().Load(textStream);
             loadedObj.transform.position = objSpawns[spawn].position;

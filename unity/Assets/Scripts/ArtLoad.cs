@@ -8,6 +8,7 @@ public class ArtLoad : MonoBehaviour
     public Transform[] artSpawns;
     public GameObject[] frameDimension;
     public Sprite[] frames;
+    public AudioSource placeSnd;
     private GameController gM;
     // Start is called before the first frame update
     void Awake()
@@ -66,7 +67,10 @@ public class ArtLoad : MonoBehaviour
         }
         else
         {
-            
+            if (gM.viewing == true)
+            {
+                placeSnd.Play();
+            }
             Texture myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
             canvas.GetComponent<Renderer>().material.mainTexture = myTexture;
             canvas.GetComponent<Inspect>().url = url;
