@@ -60,6 +60,8 @@ public class PlayerSettings : MonoBehaviour
         btnClk.volume = sFX.value / 20;
         gM.hoverUI.volume = sFX.value / 20;
         gM.gameObject.GetComponent<ArtLoad>().placeSnd.volume = sFX.value / 20;
+        gM.gameObject.GetComponent<ObjFromStream>().placeSnd.volume = sFX.value / 20;
+        gM.gameObject.GetComponent<SmallObjFromStream>().placeSnd.volume = sFX.value / 20;
         Click();
 
     }
