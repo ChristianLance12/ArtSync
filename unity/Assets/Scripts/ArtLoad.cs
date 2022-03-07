@@ -46,7 +46,7 @@ public class ArtLoad : MonoBehaviour
         gM.loadedArt.Add(art.transform.GetChild(0).gameObject);
         art.transform.position = artSpawns[spawn].position;
         art.transform.rotation = Quaternion.Euler(0, artSpawns[spawn].eulerAngles.y + 90, 90);
-        
+        artSpawns[spawn].gameObject.GetComponent<EmptyInspect>().view.SetActive(true);
         artSpawns[spawn].gameObject.SetActive(false);
         art.GetComponent<SpriteRenderer>().sprite = loadedFrame;
         art.transform.GetChild(0).gameObject.GetComponent<Inspect>().position = spawn;

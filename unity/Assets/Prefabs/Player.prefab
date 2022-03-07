@@ -123,6 +123,7 @@ MonoBehaviour:
   rotX: 200
   newRotX: 0
   sprintMultiplier: 1.5
+  direction: 0
 --- !u!54 &9130697030522181206
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -150,7 +151,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 322802b749be99a4b890f17781759d08, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
@@ -246,7 +247,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 07d56a55afad35645a78dc5ba08ee336, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
