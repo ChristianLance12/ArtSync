@@ -40,7 +40,7 @@ public class ArtLoad : MonoBehaviour
                 gM.totalItems -= 1;
                 
             }
-        }        
+        }       
         var loadedFrame = frames[frame];
         GameObject art = Instantiate(frameDimension[frameSize], new Vector3(0, 0, 0), Quaternion.identity);
         gM.loadedArt.Add(art.transform.GetChild(0).gameObject);

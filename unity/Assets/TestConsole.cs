@@ -16,12 +16,17 @@ public class TestConsole : MonoBehaviour
     public InputField ArtFrame;
     public InputField ArtSize;
     public InputField ArtURL;
+    public PlayerSettings pS;
     private ArtLoad aL;
     private ObjFromStream oL;
     private SmallObjFromStream sL;
     private GameController gM;
     void Awake()
     {
+#if !UNITY_EDITOR
+        this.gameObject.SetActive(false);
+       
+#endif
         aL = GameObject.FindWithTag("GameController").GetComponent<ArtLoad>();
         oL = GameObject.FindWithTag("GameController").GetComponent<ObjFromStream>();
         sL = GameObject.FindWithTag("GameController").GetComponent<SmallObjFromStream>();
@@ -29,10 +34,7 @@ public class TestConsole : MonoBehaviour
     }
     void Start()
     {
-#if !UNITY_EDITOR
-        this.gameObject.SetActive(false);
-       
-#endif
+
         
         ArtSize.text = "0";
         ArtFrame.text = "0";
