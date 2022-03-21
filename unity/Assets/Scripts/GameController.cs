@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,6 +36,7 @@ public class GameController : MonoBehaviour
     private SmallObjFromStream sL;
     private PlayerMove pM;
     public bool introLoad = true;
+
     void Awake()
     {
         aL = GetComponent<ArtLoad>();
@@ -45,7 +47,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        
+       
     }
 
     // Update is called once per frame
@@ -126,6 +128,6 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1;
         paused = false;
     }
- 
+
 }
  

@@ -7,7 +7,7 @@ public class ArtLoad : MonoBehaviour
 {
     public Transform[] artSpawns;
     public GameObject[] frameDimension;
-    public Sprite[] frames;
+    public Material[] frames;
     public AudioSource placeSnd;
     private GameController gM;
     // Start is called before the first frame update
@@ -41,19 +41,18 @@ public class ArtLoad : MonoBehaviour
                 
             }
         }       
-        var loadedFrame = frames[frame];
         GameObject art = Instantiate(frameDimension[frameSize], new Vector3(0, 0, 0), Quaternion.identity);
-        gM.loadedArt.Add(art.transform.GetChild(0).gameObject);
+        gM.loadedArt.Add(art.GetComponent<ContentFinder>().content);
         art.transform.position = artSpawns[spawn].position;
         art.transform.rotation = Quaternion.Euler(0, artSpawns[spawn].eulerAngles.y + 90, 90);
         artSpawns[spawn].gameObject.GetComponent<EmptyInspect>().view.SetActive(true);
         artSpawns[spawn].gameObject.SetActive(false);
-        art.GetComponent<SpriteRenderer>().sprite = loadedFrame;
-        art.transform.GetChild(0).gameObject.GetComponent<Inspect>().position = spawn;
-        art.transform.GetChild(0).gameObject.GetComponent<Inspect>().frameSize = frameSize;
-        art.transform.GetChild(0).gameObject.GetComponent<Inspect>().frame = frame;
-        gM.selected = art.transform.GetChild(0).gameObject;
-        StartCoroutine(GetTexture(url, art.transform.GetChild(0).gameObject));
+        art.GetComponent<ContentFinder>().frame.GetComponent<MeshRenderer>().material = frames[frame];
+        art.GetComponent<ContentFinder>().content.GetComponent<Inspect>().position = spawn;
+        art.GetComponent<ContentFinder>().content.GetComponent<Inspect>().frameSize = frameSize;
+        art.GetComponent<ContentFinder>().content.GetComponent<Inspect>().frame = frame;
+        gM.selected = art.GetComponent<ContentFinder>().content;
+        StartCoroutine(GetTexture(url, art.GetComponent<ContentFinder>().content));
     }
     IEnumerator GetTexture(string url, GameObject canvas)
     {

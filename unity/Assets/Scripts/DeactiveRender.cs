@@ -11,7 +11,7 @@ public class DeactiveRender : MonoBehaviour
     void Start()
     {
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-        if (gM.editor == false && pedestalObj == false)
+        if (gM.editor == false)
         {
             this.gameObject.SetActive(false);
         }

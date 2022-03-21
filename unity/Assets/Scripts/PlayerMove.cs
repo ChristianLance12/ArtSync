@@ -112,7 +112,7 @@ public class PlayerMove : MonoBehaviour
                     moving = false;
                 }
                 */
-                if (direction > 0.0001 && moving == false)
+                if (direction > 0.0001 && moving == false && gM.introLoad == false)
             {
                 if (sprinting == false)
                 {

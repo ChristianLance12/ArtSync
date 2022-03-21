@@ -141,12 +141,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   frameDimension:
-  - {fileID: 8127300311673145213, guid: 63db7946c94336244bd7e10670fa2294, type: 3}
-  - {fileID: 8127300311673145213, guid: f48792f06e066a747950b70bd8f06dc9, type: 3}
   - {fileID: 8127300311673145213, guid: 79d8fe5720bf4b44da9e917240198b6b, type: 3}
+  - {fileID: 969848163977382679, guid: 311f276978541904bb6ed15adc248ccb, type: 3}
+  - {fileID: 7378863974821742713, guid: 77675e3890bed9a4b8ae0c108144ec55, type: 3}
   frames:
-  - {fileID: 21300000, guid: e4380c76a25ab0043bf7460406de1a9a, type: 3}
-  - {fileID: 21300000, guid: e26af1f1f236dbb4e94241e6b403a10a, type: 3}
+  - {fileID: 2100000, guid: 53e069b9ebf50ef4ea26fe46ae150139, type: 2}
+  - {fileID: 2100000, guid: f21df7a399361bb4aa4ffb071f20c150, type: 2}
+  - {fileID: 2100000, guid: b0338e1fd76ac3242bdbe552c680bd83, type: 2}
   placeSnd: {fileID: 7586514174102441335}
 --- !u!82 &4977576820775579153
 AudioSource:

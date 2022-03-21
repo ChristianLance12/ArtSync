@@ -9,7 +9,10 @@ public class LoadMusic : MonoBehaviour
     public string URL;
     void Start()
     {
-        LoadSong(URL);
+        if (URL != null)
+        {
+            LoadSong(URL);
+        }
     }
     public void LoadSong(string URL)
     {
