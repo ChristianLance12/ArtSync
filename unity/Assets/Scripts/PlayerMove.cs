@@ -21,6 +21,8 @@ public class PlayerMove : MonoBehaviour
     private float sprintSpeed;
     private Rigidbody rb;
     private GameController gM;
+    private Vector3 lastLoc;
+    public float direction;
     void Start()
     {
         
@@ -32,15 +34,18 @@ public class PlayerMove : MonoBehaviour
         head.localRotation = Quaternion.Euler(0, 0, 0);
         newRotY = rotY;
         newRotX = rotX;
+        /*
         footSteps1.Pause();
         footSteps2.Pause();
+        */
+        lastLoc = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (gM.viewing == false && gM.loadingScreenOn == false)
+        if (gM.viewing == false && gM.loadingScreenOn == false && gM.paused == false)
         {
             Vector3 rotInput = new Vector3(0, Input.GetAxis("Mouse X"), 0);
             Vector3 headInput = new Vector3(-Input.GetAxis("Mouse Y"), 0, 0);
@@ -76,70 +81,124 @@ public class PlayerMove : MonoBehaviour
                 v3 += Vector3.right;
 
             }
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                moving = true;
+                sprinting = true;
+                currentSpeed = sprintSpeed;
+                if (moving == true)
+                {
+                    footSteps1.Stop();
+                    footSteps2.Play();
+                }
             }
-            else
+            if (Input.GetKeyUp(KeyCode.LeftShift))
             {
-                moving = false;
+
+                sprinting = false;
+                currentSpeed = speed;
+                if (moving == true)
+                {
+                    footSteps1.Play();
+                    footSteps2.Stop();
+                }
             }
-            if (gM.paused == false && gM.viewing == false)
+                /*
+                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+                {
+                    moving = true;
+                }
+                else
+                {
+                    moving = false;
+                }
+                */
+                if (direction > 0.0001 && moving == false)
             {
                 if (sprinting == false)
                 {
-                    if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
-                    {
-                        footSteps1.UnPause();
-                    }
+                    footSteps1.Play();
                 }
                 else if (sprinting == true)
                 {
-                    if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
-                    {
-                        footSteps2.UnPause();
-                    }
+                    footSteps2.Play();
                 }
-                if (moving == false)
-                {
-                    if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D))
-                    {
-                        footSteps1.Pause();
-                    }
-                }
-
-                if (Input.GetKeyDown(KeyCode.LeftShift))
-                {
-                    sprinting = true;
-                    currentSpeed = sprintSpeed;
-                    if (moving == true)
-                    {
-                        footSteps1.Pause();
-                        footSteps2.UnPause();
-                    }
-                }
-                if (Input.GetKeyUp(KeyCode.LeftShift))
-                {
-
-                    sprinting = false;
-                    currentSpeed = speed;
-                    if (moving == true)
-                    {
-                        footSteps1.UnPause();
-                        footSteps2.Pause();
-                    }
-                    else
-                    {
-                        footSteps1.Pause();
-                        footSteps2.Pause();
-                    }
-                }
-                if (sprinting == true && moving == false)
-                {
-
-                    footSteps2.Pause();
-                }
+                moving = true;
             }
+            else if (direction < 0.0001 && moving == true)
+            {
+                footSteps1.Stop();
+                footSteps2.Stop();
+                moving = false;
+            }
+
+            /*
+           if (gM.paused == false && gM.viewing == false)
+           {
+
+               if (sprinting == false)
+               {
+                   if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+                   {
+                       footSteps1.UnPause();
+                   }
+               }
+               else if (sprinting == true)
+               {
+                   if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+                   {
+                       footSteps2.UnPause();
+                   }
+               }
+               if (moving == false)
+               {
+                   if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D))
+                   {
+                       footSteps1.Pause();
+                   }
+               }
+
+               if (Input.GetKeyDown(KeyCode.LeftShift))
+               {
+                   sprinting = true;
+                   currentSpeed = sprintSpeed;
+                   if (moving == true)
+                   {
+                       footSteps1.Pause();
+                       footSteps2.UnPause();
+                   }
+               }
+               if (Input.GetKeyUp(KeyCode.LeftShift))
+               {
+
+                   sprinting = false;
+                   currentSpeed = speed;
+                   if (moving == true)
+                   {
+                       footSteps1.UnPause();
+                       footSteps2.Pause();
+                   }
+                   else
+                   {
+                       footSteps1.Pause();
+                       footSteps2.Pause();
+                   }
+               }
+               if (sprinting == true && moving == false)
+               {
+
+                   footSteps2.Pause();
+               }
+               
+
         }
-    }  
+            */
+        }
+
+    }
+    void FixedUpdate()
+    {
+        Vector3 newLoc = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        direction = Vector3.Distance(lastLoc, newLoc);
+        lastLoc = newLoc;
+    }
 }

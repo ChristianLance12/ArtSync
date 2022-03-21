@@ -31,4 +31,7 @@ public class WebGLPluginJS : MonoBehaviour
     [DllImport("__Internal")]
     public static extern void EmptySmallInspect(string detail);
 
+    [DllImport("__Internal")]
+    public static extern void SaveSettings(string detail);
+
 }

@@ -7,7 +7,7 @@ public class LoadingTextAnimation : MonoBehaviour
 {
     public float animTime;
     private Text text;
-    void Start()
+    void OnEnable()
     {
         text = GetComponent<Text>();
         StartCoroutine(Animate());

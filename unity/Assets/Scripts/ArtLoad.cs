@@ -8,11 +8,15 @@ public class ArtLoad : MonoBehaviour
     public Transform[] artSpawns;
     public GameObject[] frameDimension;
     public Sprite[] frames;
+    public AudioSource placeSnd;
     private GameController gM;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+    }
+    void Start()
+    {
         for (int i = 0; i < artSpawns.Length; i++)
         {
             artSpawns[i].GetComponent<EmptyInspect>().position = i;
@@ -25,7 +29,7 @@ public class ArtLoad : MonoBehaviour
     // Update is called once per frame
     public void LoadArt(int frameSize, int frame, int spawn, string url)
     {
-        gM.totalItems += 1;
+       
         for (int i = 0; i < gM.loadedArt.Count; i++)
         {
             if (gM.loadedArt[i].GetComponent<Inspect>().position == spawn)
@@ -36,13 +40,13 @@ public class ArtLoad : MonoBehaviour
                 gM.totalItems -= 1;
                 
             }
-        }        
+        }       
         var loadedFrame = frames[frame];
         GameObject art = Instantiate(frameDimension[frameSize], new Vector3(0, 0, 0), Quaternion.identity);
         gM.loadedArt.Add(art.transform.GetChild(0).gameObject);
         art.transform.position = artSpawns[spawn].position;
         art.transform.rotation = Quaternion.Euler(0, artSpawns[spawn].eulerAngles.y + 90, 90);
-        
+        artSpawns[spawn].gameObject.GetComponent<EmptyInspect>().view.SetActive(true);
         artSpawns[spawn].gameObject.SetActive(false);
         art.GetComponent<SpriteRenderer>().sprite = loadedFrame;
         art.transform.GetChild(0).gameObject.GetComponent<Inspect>().position = spawn;
@@ -63,13 +67,17 @@ public class ArtLoad : MonoBehaviour
         }
         else
         {
-            
+            if (gM.viewing == true)
+            {
+                placeSnd.Play();
+            }
             Texture myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
             canvas.GetComponent<Renderer>().material.mainTexture = myTexture;
             canvas.GetComponent<Inspect>().url = url;
             canvas.GetComponent<Inspect>().DataCollectArt();
             canvas.GetComponent<Inspect>().type = Type.ART;
             gM.loadedItems += 1;
+            gM.loading = false;
             gM.viewtxt.SetActive(true);
         }
     }
@@ -91,6 +99,11 @@ public class ArtLoad : MonoBehaviour
         gM.viewtxt2.SetActive(true);
     }
     public void ArtJson(string json)
+    {
+        gM.loadingDataArt.Add(json);
+        gM.totalItems += 1;
+    }
+    public void ArtParse(string json)
     {
        
         string[] words = json.Split(',');

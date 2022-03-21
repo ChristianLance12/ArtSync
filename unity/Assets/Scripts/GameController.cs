@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
     public GameObject settingUI;
     public GameObject viewtxt;
     public AudioSource music;
+    public AudioSource hoverUI;
     public Text viewtxtText;
     public GameObject viewtxt2;
     public Text viewtxt2Text;
@@ -25,16 +26,53 @@ public class GameController : MonoBehaviour
     public List<GameObject> loadedArt = new List<GameObject>();
     public List<GameObject> loadedObjL = new List<GameObject>();
     public List<GameObject> loadedObjS = new List<GameObject>();
+    public List<string> loadingDataArt = new List<string>();
+    public List<string> loadingDataObj = new List<string>();
+    public List<string> loadingDataSObj = new List<string>();
+    public bool loading;
+    private ArtLoad aL;
+    private ObjFromStream oL;
+    private SmallObjFromStream sL;
+    private PlayerMove pM;
+    public bool introLoad = true;
+    void Awake()
+    {
+        aL = GetComponent<ArtLoad>();
+        oL = GetComponent<ObjFromStream>();
+        sL = GetComponent<SmallObjFromStream>();
+        pM = GameObject.FindWithTag("Player").GetComponent<PlayerMove>();
+    }
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-   
         
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (loading == false && (loadingDataArt.Count > 0 || loadingDataObj.Count > 0 || loadingDataSObj.Count > 0))
+        {
+            if (loadingDataArt.Count > 0)
+            {
+                aL.ArtParse(loadingDataArt[0]);
+                loading = true;
+                loadingDataArt.RemoveAt(0);
+            }
+            else if (loadingDataObj.Count > 0)
+            {
+                oL.ObjParse(loadingDataObj[0]);
+                loading = true;
+                loadingDataObj.RemoveAt(0);
+            }
+           else if (loadingDataSObj.Count > 0)
+            {
+                sL.ObjSParse(loadingDataSObj[0]);
+                loading = true;
+                loadingDataSObj.RemoveAt(0);
+            }
+            
+        }
         if (viewing == false && loadingScreenOn == false)
         {
             if (Input.GetKeyDown(KeyCode.Escape) && paused == false)
@@ -59,6 +97,12 @@ public class GameController : MonoBehaviour
         }
         if (loadedItems >= totalItems && loadingScreen == enabled || totalItems == 0)
         {
+            if (introLoad == true)
+            {
+                selected = null;
+                introLoad = false;
+                viewtxt.SetActive(false);
+            }
             loadingScreen.SetActive(false);
             loadingScreenOn = false;
         }
@@ -70,6 +114,8 @@ public class GameController : MonoBehaviour
     }
     public void Pause()
     {
+        pM.footSteps1.Pause();
+        pM.footSteps2.Pause();
         Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0;
         paused = true;
@@ -80,5 +126,6 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1;
         paused = false;
     }
+ 
 }
  

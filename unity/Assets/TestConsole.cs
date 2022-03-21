@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class TestConsole : MonoBehaviour
 {
+    public bool fullScene;
     public InputField ObjSPos;
     public InputField ObjSText;
     public InputField ObjSURL;
@@ -15,10 +16,12 @@ public class TestConsole : MonoBehaviour
     public InputField ArtFrame;
     public InputField ArtSize;
     public InputField ArtURL;
+    public PlayerSettings pS;
     private ArtLoad aL;
     private ObjFromStream oL;
     private SmallObjFromStream sL;
-    void Start()
+    private GameController gM;
+    void Awake()
     {
 #if !UNITY_EDITOR
         this.gameObject.SetActive(false);
@@ -27,6 +30,11 @@ public class TestConsole : MonoBehaviour
         aL = GameObject.FindWithTag("GameController").GetComponent<ArtLoad>();
         oL = GameObject.FindWithTag("GameController").GetComponent<ObjFromStream>();
         sL = GameObject.FindWithTag("GameController").GetComponent<SmallObjFromStream>();
+        gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+    }
+    void Start()
+    {
+
         
         ArtSize.text = "0";
         ArtFrame.text = "0";
@@ -35,6 +43,10 @@ public class TestConsole : MonoBehaviour
         ObjURL.text = "https://groups.csail.mit.edu/graphics/classes/6.837/F03/models/cow-nonormals.obj";
         ObjSText.text = "0";
         ObjSURL.text = "https://groups.csail.mit.edu/graphics/classes/6.837/F03/models/teapot.obj";
+        if (fullScene == true)
+        {
+            fullSceneLoad();
+        }
     }
     public void TestLoadArt()
     {
@@ -106,6 +118,32 @@ public class TestConsole : MonoBehaviour
         catch
         {
             Debug.Log("INVALID PARAMETERS");
+        }
+         }
+    public void fullSceneLoad()
+    {
+        for (int i = 0; i < aL.artSpawns.Length; i++)
+        {
+            
+            int size = Random.Range(0, aL.frameDimension.Length);
+            int frame = Random.Range(0, aL.frames.Length);
+            string data = size + "," + frame + "," + i + "," + ArtURL.text;
+            aL.ArtJson(data);
+        }
+        for (int i = 0; i < oL.objSpawns.Length; i++)
+        {
+
+            int texture = Random.Range(0, gM.textures.Length);
+          
+            string data = i + "," + texture + "," + ObjURL.text;
+            oL.ObjJson(data);
+        }
+        for (int i = 0; i < sL.objSpawns.Length; i++)
+        {
+
+            int texture = Random.Range(0, gM.textures.Length);
+            string data = i + "," + texture + "," + ObjSURL.text;
+            sL.ObjSJson(data);
         }
     }
 }
