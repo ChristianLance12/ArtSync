@@ -66,4 +66,10 @@ public class LoadMusic : MonoBehaviour
             }
         }
     }
+    public void DeleteSong()
+    {
+        music.Stop();
+        music.clip = null;
+        
+    }
 }

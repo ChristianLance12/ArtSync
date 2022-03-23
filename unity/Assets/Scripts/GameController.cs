@@ -128,6 +128,9 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1;
         paused = false;
     }
-
+    public void EditorOff()
+    {
+        editor = false;
+    }
 }
  
