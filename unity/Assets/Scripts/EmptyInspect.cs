@@ -12,13 +12,14 @@ public class EmptyInspect : MonoBehaviour
     public GameObject view;
     private TestConsole tC;
     private PlayerMove pM;
-    void Start()
+    void Awake()
     {
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
 #if UNITY_EDITOR
         tC = GameObject.FindWithTag("TestConsole").GetComponent<TestConsole>();
-        pM = GameObject.FindWithTag("Player").GetComponent<PlayerMove>();
 #endif
+        pM = GameObject.FindWithTag("Player").GetComponent<PlayerMove>();
+
     }
 
     void Update()

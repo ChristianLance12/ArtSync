@@ -23,10 +23,12 @@ public class TestConsole : MonoBehaviour
     private GameController gM;
     void Awake()
     {
-#if !UNITY_EDITOR
-        this.gameObject.SetActive(false);
-       
+
+
+        #if !UNITY_EDITOR
+        fullScene = false;
 #endif
+
         aL = GameObject.FindWithTag("GameController").GetComponent<ArtLoad>();
         oL = GameObject.FindWithTag("GameController").GetComponent<ObjFromStream>();
         sL = GameObject.FindWithTag("GameController").GetComponent<SmallObjFromStream>();
@@ -34,8 +36,9 @@ public class TestConsole : MonoBehaviour
     }
     void Start()
     {
-
-        
+        #if !UNITY_EDITOR
+        this.gameObject.SetActive(false);
+#endif
         ArtSize.text = "0";
         ArtFrame.text = "0";
         ArtURL.text = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2FlQezinb283E%2Fmaxresdefault.jpg&f=1&nofb=1";
