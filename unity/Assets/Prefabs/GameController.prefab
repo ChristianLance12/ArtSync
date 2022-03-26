@@ -79,7 +79,7 @@ MonoBehaviour:
   loadingDataObj: []
   loadingDataSObj: []
   loading: 0
-  introLoad: 1
+  introLoad: 0
 --- !u!114 &3134413713363427187
 MonoBehaviour:
   m_ObjectHideFlags: 0

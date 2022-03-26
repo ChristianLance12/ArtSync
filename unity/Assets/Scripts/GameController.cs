@@ -132,5 +132,9 @@ public class GameController : MonoBehaviour
     {
         editor = false;
     }
+    public void IntroLoadOn()
+    {
+        introLoad = true;
+    }
 }
  

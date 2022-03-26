@@ -48,6 +48,7 @@ public class TestConsole : MonoBehaviour
         ObjSURL.text = "https://groups.csail.mit.edu/graphics/classes/6.837/F03/models/teapot.obj";
         if (fullScene == true)
         {
+            gM.IntroLoadOn();
             fullSceneLoad();
         }
     }
