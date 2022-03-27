@@ -112,7 +112,7 @@ public class PlayerMove : MonoBehaviour
                     moving = false;
                 }
                 */
-                if (direction > 0.000001 && moving == false && gM.introLoad == false)
+                if (direction > 0.0000001 && moving == false && gM.introLoad == false)
             {
                 if (sprinting == false)
                 {
@@ -124,7 +124,7 @@ public class PlayerMove : MonoBehaviour
                 }
                 moving = true;
             }
-            else if (direction < 0.000001 && moving == true)
+            else if (direction < 0.0000001 && moving == true)
             {
                 footSteps1.Stop();
                 footSteps2.Stop();

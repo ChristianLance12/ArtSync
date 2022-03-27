@@ -131,6 +131,18 @@ public class GameController : MonoBehaviour
     public void EditorOff()
     {
         editor = false;
+        foreach (Transform spawn in aL.artSpawns)
+        {
+            spawn.gameObject.GetComponent<DeactiveRender>().enabled = true;
+        }
+        foreach (Transform spawn in sL.objSpawns)
+        {
+            spawn.gameObject.GetComponent<DeactiveRender>().enabled = true;
+        }
+        foreach (Transform spawn in oL.objSpawns)
+        {
+            spawn.gameObject.GetComponent<DeactiveRender>().enabled = true;
+        }
     }
     public void IntroLoadOn()
     {

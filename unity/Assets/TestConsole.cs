@@ -51,7 +51,9 @@ public class TestConsole : MonoBehaviour
             gM.IntroLoadOn();
             fullSceneLoad();
         }
+        StartCoroutine(EditorOff());
     }
+    
     public void TestLoadArt()
     {
         try
@@ -149,5 +151,11 @@ public class TestConsole : MonoBehaviour
             string data = i + "," + texture + "," + ObjSURL.text;
             sL.ObjSJson(data);
         }
+    }
+    public IEnumerator EditorOff()
+    {
+        yield return new WaitForSeconds(5);
+        gM.EditorOff();
+        Debug.Log("EditorOff off ienumerator");
     }
 }
