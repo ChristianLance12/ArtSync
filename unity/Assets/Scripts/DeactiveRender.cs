@@ -7,41 +7,25 @@ public class DeactiveRender : MonoBehaviour
 {
     private GameController gM;
     public bool pedestalObj;
-    private bool used;
-    private bool usedCheckDone;
-   
-    void OnEnable()
+    public bool used;
+    private void Awake()
     {
         gM = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-        if (gM.editor == false && pedestalObj == true)
-        {
-            usedCheck();
-            GetComponent<EmptyInspect>().enabled = false;
-        }
-        else if (gM.editor == false)
-        {
-            this.gameObject.SetActive(false);
-        }
+    }
+    void OnEnable()
+    {
+       
+        StartCoroutine(EditorCheck());
         
     }
-    private void Update()
+  
+    public IEnumerator EditorCheck()
     {
-        if (pedestalObj == true && usedCheckDone == true && used == false)
+        yield return 0;
+        if (gM.editor == false && used == false)
         {
             this.gameObject.SetActive(false);
         }
     }
-    public void usedCheck()
-    {
-        foreach (GameObject obj in gM.loadedObjS)
-        {
-            if (this.gameObject.GetComponent<EmptyInspect>().position == obj.GetComponent<Inspect>().position)
-            {
-
-                used = true;
-            }
-           
-        }
-        usedCheckDone = true;
-    }
+   
 }

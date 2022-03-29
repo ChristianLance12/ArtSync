@@ -51,7 +51,7 @@ public class TestConsole : MonoBehaviour
             gM.IntroLoadOn();
             fullSceneLoad();
         }
-        StartCoroutine(EditorOff());
+        gM.EditorOff();
     }
     
     public void TestLoadArt()

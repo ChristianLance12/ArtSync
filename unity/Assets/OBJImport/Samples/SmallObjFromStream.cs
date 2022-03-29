@@ -66,6 +66,7 @@ public class SmallObjFromStream : MonoBehaviour {
             gM.loadedObjS.Add(loadedObj.transform.GetChild(0).gameObject);
             var camera = Instantiate(cameraPrefab, new Vector3(loadedObj.transform.position.x - 2.5f, loadedObj.transform.position.y - 1f, loadedObj.transform.position.z), Quaternion.identity);
             objSpawns[spawn].gameObject.SetActive(true);
+            objSpawns[spawn].GetComponent<DeactiveRender>().used = true;
             objSpawns[spawn].GetComponent<EmptyInspect>().enabled = false;
             objSpawns[spawn].GetComponent<EmptyInspect>().view.SetActive(false);
             camera.SetActive(false);

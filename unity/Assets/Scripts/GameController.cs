@@ -133,15 +133,15 @@ public class GameController : MonoBehaviour
         editor = false;
         foreach (Transform spawn in aL.artSpawns)
         {
-            spawn.gameObject.GetComponent<DeactiveRender>().enabled = true;
+            spawn.gameObject.GetComponent<DeactiveRender>().EditorCheck();
         }
         foreach (Transform spawn in sL.objSpawns)
         {
-            spawn.gameObject.GetComponent<DeactiveRender>().enabled = true;
+            spawn.gameObject.GetComponent<DeactiveRender>().EditorCheck();
         }
         foreach (Transform spawn in oL.objSpawns)
         {
-            spawn.gameObject.GetComponent<DeactiveRender>().enabled = true;
+            spawn.gameObject.GetComponent<DeactiveRender>().EditorCheck();
         }
     }
     public void IntroLoadOn()
