@@ -25,9 +25,7 @@ public class TestConsole : MonoBehaviour
     {
 
 
-        #if !UNITY_EDITOR
-        fullScene = false;
-#endif
+       
 
         aL = GameObject.FindWithTag("GameController").GetComponent<ArtLoad>();
         oL = GameObject.FindWithTag("GameController").GetComponent<ObjFromStream>();
@@ -51,7 +49,7 @@ public class TestConsole : MonoBehaviour
             gM.IntroLoadOn();
             fullSceneLoad();
         }
-        gM.EditorOff();
+      
     }
     
     public void TestLoadArt()
